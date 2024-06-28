@@ -1,5 +1,8 @@
 .navbar {
-	background-color: red;
+	background-color: aqua;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 	width: 100svw;
 	height: calc(5rem - 1px);
 }

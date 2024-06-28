@@ -1,13 +1,16 @@
-import { Box } from "@mui/material";
-import "./navbar.scss";
+import { Box, Typography } from "@mui/material";
+import "./Navbar.scss";
 import Icon from "../icon/Icon";
+import User from "../user/User";
 
 function Navbar() {
 	return (
-		<Box className="navbar">
-
-			<Icon />
-		</Box>
+		<div className="navbar">
+			<User></User>
+			<div>
+				<Icon />
+			</div>
+		</div>
 	);
 }
 
