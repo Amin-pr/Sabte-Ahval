@@ -1,11 +1,13 @@
 import Navbar from "../../ui/components/navbar/Navbar";
 import RightBar from "../../ui/components/rightbar/RightBar";
-import classes from "./Dashboard.module.scss";
+import styles from "./Dashboard.module.scss";
+import TableComp from "../../ui/components/table/TableComp";
 function Dashboard() {
 	return (
-		<div className={classes.holder}>
-			<Navbar>{/* <ToggleButton>asdaddddd</ToggleButton> */}</Navbar>
+		<div className={styles.holder}>
+			{/* <Navbar><ToggleButton>asdaddddd</ToggleButton></Navbar> */}
 			<RightBar></RightBar>
+			<TableComp />
 		</div>
 	);
 }

@@ -1,9 +1,9 @@
-import classes from "./Navbar.module.scss";
+import styles from "./Navbar.module.scss";
 import Icon from "../icon/Icon";
 import User from "../user/User";
 function Navbar() {
 	return (
-		<div className={classes.navbar}>
+		<div className={styles.navbar}>
 			<User></User>
 			<div>
 				<Icon />

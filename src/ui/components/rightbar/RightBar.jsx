@@ -1,61 +1,185 @@
-import {
-	Accordion,
-	AccordionActions,
-	AccordionDetails,
-	AccordionSummary,
-	Button,
-} from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import classes from "./RightBar.module.scss";
+import * as React from "react";
+import { styled, useTheme } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import MuiAppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CssBaseline from "@mui/material/CssBaseline";
+import List from "@mui/material/List";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
+import { FeedOutlined, VerifiedUser } from "@mui/icons-material";
 
-function RightBar() {
+import styles from "./RightBar.module.scss";
+const drawerWidth = 240;
+
+const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+	({ theme, open }) => ({
+		flexGrow: 1,
+		padding: theme.spacing(3),
+		transition: theme.transitions.create("margin", {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
+		}),
+		marginRight: -drawerWidth,
+		...(open && {
+			transition: theme.transitions.create("margin", {
+				easing: theme.transitions.easing.easeOut,
+				duration: theme.transitions.duration.enteringScreen,
+			}),
+			marginRight: 0,
+		}),
+
+		position: "relative",
+	})
+);
+
+const AppBar = styled(MuiAppBar, {
+	shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+	transition: theme.transitions.create(["margin", "width"], {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	...(open && {
+		width: `calc(100% - ${drawerWidth}px)`,
+		transition: theme.transitions.create(["margin", "width"], {
+			easing: theme.transitions.easing.easeOut,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+		marginRight: drawerWidth,
+	}),
+}));
+
+const DrawerHeader = styled("div")(({ theme }) => ({
+	display: "flex",
+	alignItems: "center",
+	padding: theme.spacing(0, 1),
+	// necessary for content to be below app bar
+	...theme.mixins.toolbar,
+	justifyContent: "flex-start",
+}));
+
+export default function PersistentDrawerRight() {
+	const theme = useTheme();
+	const [open, setOpen] = React.useState(false);
+
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
+
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
+
 	return (
-		<div className={classes.rightBar}>
-			<Accordion className={classes.toogleButton}>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel1-content"
-					id="panel1-header"
-				>
-					Accordion 1
-				</AccordionSummary>
-				<AccordionDetails>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-					malesuada lacus ex, sit amet blandit leo lobortis eget.
-				</AccordionDetails>
-			</Accordion>
-			<Accordion>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel2-content"
-					id="panel2-header"
-				>
-					Accordion 2
-				</AccordionSummary>
-				<AccordionDetails>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-					malesuada lacus ex, sit amet blandit leo lobortis eget.
-				</AccordionDetails>
-			</Accordion>
-			<Accordion defaultExpanded>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel3-content"
-					id="panel3-header"
-				>
-					Accordion Actions
-				</AccordionSummary>
-				<AccordionDetails>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-					malesuada lacus ex, sit amet blandit leo lobortis eget.
-				</AccordionDetails>
-				<AccordionActions>
-					<Button>Cancel</Button>
-					<Button>Agree</Button>
-				</AccordionActions>
-			</Accordion>
-		</div>
+		<Box sx={{ display: "flex" }}>
+			<CssBaseline />
+			<AppBar
+				position="fixed"
+				open={open}
+			>
+				<Toolbar>
+					<Box
+						variant="h6"
+						noWrap
+						sx={{ flexGrow: 1 }}
+						component="div"
+					>
+						{/* {username} */}
+						<VerifiedUser />
+						users name
+					</Box>
+					<IconButton
+						color="inherit"
+						aria-label="open drawer"
+						edge="end"
+						onClick={handleDrawerOpen}
+						sx={{ ...(open && { display: "none" }) }}
+					>
+						<MenuIcon />
+					</IconButton>
+				</Toolbar>
+			</AppBar>
+			
+			<Drawer
+				sx={{
+					width: drawerWidth,
+					flexShrink: 0,
+					"& .MuiDrawer-paper": {
+						width: drawerWidth,
+					},
+				}}
+				variant="persistent"
+				anchor="right"
+				open={open}
+			>
+				<DrawerHeader>
+					<IconButton onClick={handleDrawerClose}>
+						{theme.direction === "rtl" ? (
+							<ChevronLeftIcon />
+						) : (
+							<ChevronRightIcon />
+						)}
+					</IconButton>
+				</DrawerHeader>
+				<Divider textAlign="right">دفاتر</Divider>
+				<List>
+					<ListItem
+						disablePadding
+						alignItems="flex-center"
+					>
+						<ListItemButton>
+							<ListItemText primary="اطلاعات دفاتر" />
+							<ListItemIcon>
+								<FeedOutlined />
+							</ListItemIcon>
+						</ListItemButton>
+					</ListItem>
+					<ListItem
+						disablePadding
+						sx={{ justifyContent: "end" }}
+					>
+						<ListItemButton>
+							<ListItemText primary="سوابق دفاتر" />
+							<ListItemIcon>
+								<FeedOutlined />
+							</ListItemIcon>
+						</ListItemButton>
+					</ListItem>
+					<ListItem
+						disablePadding
+						sx={{ justifyContent: "end" }}
+					>
+						<ListItemButton>
+							<ListItemText primary="نتایج نظرسنجی" />
+							<ListItemIcon>
+								<FeedOutlined />
+							</ListItemIcon>
+						</ListItemButton>
+					</ListItem>
+				</List>
+				<Divider />
+				<List>
+					<ListItem disablePadding>
+						<ListItemButton>
+							<ListItemText primary="لیست تعرفه ها" />
+							<ListItemIcon>
+								<ChecklistRtlOutlinedIcon />
+							</ListItemIcon>
+						</ListItemButton>
+					</ListItem>
+				</List>
+			</Drawer>
+		</Box>
 	);
 }
-
-export default RightBar;
