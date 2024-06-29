@@ -110,7 +110,7 @@ export default function PersistentDrawerRight() {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
-			
+
 			<Drawer
 				sx={{
 					width: drawerWidth,
@@ -132,14 +132,19 @@ export default function PersistentDrawerRight() {
 						)}
 					</IconButton>
 				</DrawerHeader>
-				<Divider textAlign="right">دفاتر</Divider>
+				<Divider
+					textAlign="right"
+					className="font"
+				>
+					دفاتر
+				</Divider>
 				<List>
 					<ListItem
 						disablePadding
-						alignItems="flex-center"
+						alignItems="flex-start"
 					>
-						<ListItemButton>
-							<ListItemText primary="اطلاعات دفاتر" />
+						<ListItemButton alignItems="center">
+							<p>اطلاعات دفاتر</p>
 							<ListItemIcon>
 								<FeedOutlined />
 							</ListItemIcon>
@@ -150,7 +155,8 @@ export default function PersistentDrawerRight() {
 						sx={{ justifyContent: "end" }}
 					>
 						<ListItemButton>
-							<ListItemText primary="سوابق دفاتر" />
+							{/* <ListItemText primary="سوابق دفاتر" /> */}
+							<p>سوابق دفاتر"</p>
 							<ListItemIcon>
 								<FeedOutlined />
 							</ListItemIcon>
@@ -161,18 +167,40 @@ export default function PersistentDrawerRight() {
 						sx={{ justifyContent: "end" }}
 					>
 						<ListItemButton>
-							<ListItemText primary="نتایج نظرسنجی" />
+							{/* <ListItemText primary="نتایج نظرسنجی" /> */}
+							<p>نتایج نظرسنجی"</p>
 							<ListItemIcon>
 								<FeedOutlined />
 							</ListItemIcon>
 						</ListItemButton>
 					</ListItem>
 				</List>
-				<Divider />
+				<Divider
+					textAlign="right"
+					className="font"
+				>
+					مالی
+				</Divider>
 				<List>
 					<ListItem disablePadding>
 						<ListItemButton>
-							<ListItemText primary="لیست تعرفه ها" />
+							<p>لیست تعرفه ها</p>
+							<ListItemIcon>
+								<ChecklistRtlOutlinedIcon />
+							</ListItemIcon>
+						</ListItemButton>
+					</ListItem>
+				</List>
+				<Divider
+					textAlign="right"
+					className="font"
+				>
+					کاربران
+				</Divider>
+				<List>
+					<ListItem disablePadding>
+						<ListItemButton>
+							<p>مدیریت کاربران</p>
 							<ListItemIcon>
 								<ChecklistRtlOutlinedIcon />
 							</ListItemIcon>

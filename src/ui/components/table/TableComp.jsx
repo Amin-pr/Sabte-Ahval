@@ -1,4 +1,4 @@
-import styles from "./TableComp.module.scss";
+
 import * as React from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -13,8 +13,6 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import { visuallyHidden } from "@mui/utils";
 
 function createData(
@@ -47,10 +45,32 @@ const rows = [
 	createData(1, 1, "تهران", "تهران", 305, 3.7, 67, 4.3, "فعال", "شسی"),
 	createData(2, 2, "Donut", "تهران", 452, 25.0, 51, 4.9, "فعال", "شسی"),
 	createData(3, 3, "Eclair", "تهران", 262, 16.0, 24, 6.0, "فعال", "شسی"),
-	createData(4, 4, "Frozen yoghurt", "تهران", 159, 6.0, 24, 4.0, "فعال", "ششسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیسی"),
+	createData(
+		4,
+		4,
+		"Frozen yoghurt",
+		"تهران",
+		159,
+		6.0,
+		24,
+		4.0,
+		"فعال",
+		"ششسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیسی"
+	),
 	createData(5, 5, "Gingerbread", "تهران", 356, 16.0, 49, 3.9, "فعال", "شسی"),
 	createData(6, 6, "Honeycomb", "تهران", 408, 3.2, 87, 6.5, "فعال", "شسی"),
-	createData(	7,7,"Ice cream sandwich","تهران",237,9.0,37,4.3,"فعال","شسی"),
+	createData(
+		7,
+		7,
+		"Ice cream sandwich",
+		"تهران",
+		237,
+		9.0,
+		37,
+		4.3,
+		"فعال",
+		"شسی"
+	),
 	createData(8, 8, "Jelly Bean", "تهران", 375, 0.0, 94, 0.0, "فعال", "شسی"),
 	createData(9, 9, "KitKat", "تهران", 518, 26.0, 65, 7.0, "فعال", "شسی"),
 	createData(10, 10, "Lollipop", "تهران", 392, 0.2, 98, 0.0, "فعال", "شسی"),
@@ -266,7 +286,7 @@ export default function EnhancedTable() {
 	const [orderBy, setOrderBy] = React.useState("calories");
 	const [selected, setSelected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
-	const [dense, setDense] = React.useState(false);
+	// const [dense, setDense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const handleRequestSort = (event, property) => {
@@ -284,24 +304,24 @@ export default function EnhancedTable() {
 		setSelected([]);
 	};
 
-	const handleClick = (event, id) => {
-		const selectedIndex = selected.indexOf(id);
-		let newSelected = [];
+	// const handleClick = (event, id) => {
+	// 	const selectedIndex = selected.indexOf(id);
+	// 	let newSelected = [];
 
-		if (selectedIndex === -1) {
-			newSelected = newSelected.concat(selected, id);
-		} else if (selectedIndex === 0) {
-			newSelected = newSelected.concat(selected.slice(1));
-		} else if (selectedIndex === selected.length - 1) {
-			newSelected = newSelected.concat(selected.slice(0, -1));
-		} else if (selectedIndex > 0) {
-			newSelected = newSelected.concat(
-				selected.slice(0, selectedIndex),
-				selected.slice(selectedIndex + 1)
-			);
-		}
-		setSelected(newSelected);
-	};
+	// 	if (selectedIndex === -1) {
+	// 		newSelected = newSelected.concat(selected, id);
+	// 	} else if (selectedIndex === 0) {
+	// 		newSelected = newSelected.concat(selected.slice(1));
+	// 	} else if (selectedIndex === selected.length - 1) {
+	// 		newSelected = newSelected.concat(selected.slice(0, -1));
+	// 	} else if (selectedIndex > 0) {
+	// 		newSelected = newSelected.concat(
+	// 			selected.slice(0, selectedIndex),
+	// 			selected.slice(selectedIndex + 1)
+	// 		);
+	// 	}
+	// 	setSelected(newSelected);
+	// };
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
@@ -312,9 +332,9 @@ export default function EnhancedTable() {
 		setPage(0);
 	};
 
-	const handleChangeDense = (event) => {
-		setDense(event.target.checked);
-	};
+	// const handleChangeDense = (event) => {
+	// 	setDense(event.target.checked);
+	// };
 
 	const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -332,14 +352,14 @@ export default function EnhancedTable() {
 	);
 
 	return (
-		<Box sx={{ width: "100%" }}>
-			<Paper sx={{ width: "100%", mb: 2 }}>
+		<Box sx={{ width: "100%", margin: "  1rem 0 1rem 0", padding: "2rem" }}>
+			<Paper sx={{ width: "100%", m: 2, p: 2 }}>
 				<EnhancedTableToolbar numSelected={selected.length} />
 				<TableContainer>
 					<Table
 						sx={{ minWidth: 750 }}
 						aria-labelledby="tableTitle"
-						size={dense ? "small" : "medium"}
+						size={"medium"}
 					>
 						<EnhancedTableHead
 							numSelected={selected.length}
@@ -352,7 +372,7 @@ export default function EnhancedTable() {
 						<TableBody>
 							{visibleRows.map((row, index) => {
 								const isItemSelected = isSelected(row.id);
-								const labelId = `enhanced-table-checkbox-${index}`;
+								// const labelId = `enhanced-table-checkbox-${index}`;
 
 								return (
 									<TableRow
@@ -381,7 +401,7 @@ export default function EnhancedTable() {
 											// scope="row"
 											// padding="none"
 											align="right"
-											sx={{ backgroundColor: "red" }}
+											// sx={{ backgroundColor: "red" }}
 										>
 											{row.num}
 										</TableCell>
@@ -408,20 +428,20 @@ export default function EnhancedTable() {
 					page={page}
 					onPageChange={handleChangePage}
 					onRowsPerPageChange={handleChangeRowsPerPage}
-          showFirstButton
-          showLastButton
-          labelRowsPerPage="تعداد ردیف"
+					showFirstButton
+					showLastButton
+					labelRowsPerPage="تعداد ردیف"
 				></TablePagination>
 			</Paper>
 			{/* <FormControlLabel
-				control={
+					control={
 					<Switch
-						checked={dense}
-						onChange={handleChangeDense}
+					checked={dense}
+					onChange={handleChangeDense}
 					/>
 				}
 				label="Dense padding"
-			/> */}
+				/> */}
 		</Box>
 	);
 }
