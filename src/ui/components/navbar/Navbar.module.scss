@@ -1,5 +1,6 @@
+@import "src/ui/theme/color/_Color.scss";
 .navbar {
-	background-color: aqua;
+	// background-color: $primaryColor;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

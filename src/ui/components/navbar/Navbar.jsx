@@ -1,11 +1,9 @@
-import { Box, Typography } from "@mui/material";
-import "./Navbar.scss";
+import classes from "./Navbar.module.scss";
 import Icon from "../icon/Icon";
 import User from "../user/User";
-
 function Navbar() {
 	return (
-		<div className="navbar">
+		<div className={classes.navbar}>
 			<User></User>
 			<div>
 				<Icon />

@@ -1,36 +1,60 @@
-import { Box, Divider, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import "./RightBar.scss";
+import {
+	Accordion,
+	AccordionActions,
+	AccordionDetails,
+	AccordionSummary,
+	Button,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import classes from "./RightBar.module.scss";
 
 function RightBar() {
 	return (
-		<Box className="right-bar">
-			<Box className="toggle-button-holder">
-				<ToggleButtonGroup className="toggle-button">
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">3</ToggleButton>
-				</ToggleButtonGroup>
-				<Divider />
-				<ToggleButtonGroup className="toggle-button-holder">
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">3</ToggleButton>
-				</ToggleButtonGroup>
-				<Divider />
-
-				<ToggleButtonGroup className="toggle-button-holder">
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">2</ToggleButton>
-					<ToggleButton className="main-button">3</ToggleButton>
-				</ToggleButtonGroup>
-			</Box>
-		</Box>
+		<div className={classes.rightBar}>
+			<Accordion className={classes.toogleButton}>
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
+					aria-controls="panel1-content"
+					id="panel1-header"
+				>
+					Accordion 1
+				</AccordionSummary>
+				<AccordionDetails>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+					malesuada lacus ex, sit amet blandit leo lobortis eget.
+				</AccordionDetails>
+			</Accordion>
+			<Accordion>
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
+					aria-controls="panel2-content"
+					id="panel2-header"
+				>
+					Accordion 2
+				</AccordionSummary>
+				<AccordionDetails>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+					malesuada lacus ex, sit amet blandit leo lobortis eget.
+				</AccordionDetails>
+			</Accordion>
+			<Accordion defaultExpanded>
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
+					aria-controls="panel3-content"
+					id="panel3-header"
+				>
+					Accordion Actions
+				</AccordionSummary>
+				<AccordionDetails>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+					malesuada lacus ex, sit amet blandit leo lobortis eget.
+				</AccordionDetails>
+				<AccordionActions>
+					<Button>Cancel</Button>
+					<Button>Agree</Button>
+				</AccordionActions>
+			</Accordion>
+		</div>
 	);
 }
 
