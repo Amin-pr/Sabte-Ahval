@@ -1,4 +1,4 @@
-
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
@@ -14,70 +14,16 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-
-function createData(
-	id,
-	num,
-	province,
-	city,
-	rank,
-	score,
-	officeCode,
-	session,
-	location,
-	status
-) {
-	return {
-		id,
-		num,
-		province,
-		city,
-		rank,
-		score,
-		officeCode,
-		session,
-		location,
-		status,
-	};
-}
-
-const rows = [
-	createData(1, 1, "تهران", "تهران", 305, 3.7, 67, 4.3, "فعال", "شسی"),
-	createData(2, 2, "Donut", "تهران", 452, 25.0, 51, 4.9, "فعال", "شسی"),
-	createData(3, 3, "Eclair", "تهران", 262, 16.0, 24, 6.0, "فعال", "شسی"),
-	createData(
-		4,
-		4,
-		"Frozen yoghurt",
-		"تهران",
-		159,
-		6.0,
-		24,
-		4.0,
-		"فعال",
-		"ششسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیشسیسی"
-	),
-	createData(5, 5, "Gingerbread", "تهران", 356, 16.0, 49, 3.9, "فعال", "شسی"),
-	createData(6, 6, "Honeycomb", "تهران", 408, 3.2, 87, 6.5, "فعال", "شسی"),
-	createData(
-		7,
-		7,
-		"Ice cream sandwich",
-		"تهران",
-		237,
-		9.0,
-		37,
-		4.3,
-		"فعال",
-		"شسی"
-	),
-	createData(8, 8, "Jelly Bean", "تهران", 375, 0.0, 94, 0.0, "فعال", "شسی"),
-	createData(9, 9, "KitKat", "تهران", 518, 26.0, 65, 7.0, "فعال", "شسی"),
-	createData(10, 10, "Lollipop", "تهران", 392, 0.2, 98, 0.0, "فعال", "شسی"),
-	createData(11, 11, "Marshmallow", "تهران", 318, 0, 81, 2.0, "فعال", "شسی"),
-	createData(12, 12, "Nougat", "تهران", 360, 19.0, 9, 37.0, "فعال", "شسی"),
-	createData(13, 13, "Oreo", "تهران", 437, 18.0, 63, 4.0, "فعال", "شسی"),
-];
+import Test from "../csvDownloader/CsvDownloader";
+import {
+	Checkbox,
+	FormControlLabel,
+	IconButton,
+	Switch,
+	Tooltip,
+	Typography,
+} from "@mui/material";
+import { DeleteSharp, FilterList } from "@mui/icons-material";
 
 function descendingComparator(a, b, orderBy) {
 	if (b[orderBy] < a[orderBy]) {
@@ -100,15 +46,15 @@ function getComparator(order, orderBy) {
 // only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
 // with exampleArray.slice().sort(exampleComparator)
 function stableSort(array, comparator) {
-	const stabilizedThis = array.map((el, index) => [el, index]);
-	stabilizedThis.sort((a, b) => {
+	const stabilizedThis = array?.map((el, index) => [el, index]);
+	stabilizedThis?.sort((a, b) => {
 		const order = comparator(a[0], b[0]);
 		if (order !== 0) {
 			return order;
 		}
 		return a[1] - b[1];
 	});
-	return stabilizedThis.map((el) => el[0]);
+	return stabilizedThis?.map((el) => el[0]);
 }
 
 const headCells = [
@@ -170,11 +116,11 @@ const headCells = [
 
 function EnhancedTableHead(props) {
 	const {
-		// onSelectAllClick,
+		onSelectAllClick,
 		order,
 		orderBy,
-		// numSelected,
-		// rowCount,
+		numSelected,
+		rowCount,
 		onRequestSort,
 	} = props;
 	const createSortHandler = (property) => (event) => {
@@ -240,7 +186,7 @@ function EnhancedTableToolbar(props) {
 				}),
 			}}
 		>
-			{/* {numSelected > 0 ? (
+			{numSelected > 0 ? (
 				<Typography
 					sx={{ flex: "1 1 100%" }}
 					color="inherit"
@@ -263,16 +209,16 @@ function EnhancedTableToolbar(props) {
 			{numSelected > 0 ? (
 				<Tooltip title="Delete">
 					<IconButton>
-						<DeleteIcon />
+						<DeleteSharp />
 					</IconButton>
 				</Tooltip>
 			) : (
 				<Tooltip title="Filter list">
 					<IconButton>
-						<FilterListIcon />
+						<FilterList />
 					</IconButton>
 				</Tooltip>
-			)} */}
+			)}
 		</Toolbar>
 	);
 }
@@ -281,12 +227,12 @@ EnhancedTableToolbar.propTypes = {
 	numSelected: PropTypes.number.isRequired,
 };
 
-export default function EnhancedTable() {
+export default function EnhancedTable({ rows }) {
 	const [order, setOrder] = React.useState("asc");
 	const [orderBy, setOrderBy] = React.useState("calories");
 	const [selected, setSelected] = React.useState([]);
 	const [page, setPage] = React.useState(0);
-	// const [dense, setDense] = React.useState(false);
+	const [dense, setDense] = React.useState(false);
 	const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
 	const handleRequestSort = (event, property) => {
@@ -297,32 +243,32 @@ export default function EnhancedTable() {
 
 	const handleSelectAllClick = (event) => {
 		if (event.target.checked) {
-			const newSelected = rows.map((n) => n.id);
+			const newSelected = rows?.map((n) => n.id);
 			setSelected(newSelected);
 			return;
 		}
 		setSelected([]);
 	};
 
-	// const handleClick = (event, id) => {
-	// 	const selectedIndex = selected.indexOf(id);
-	// 	let newSelected = [];
+	const handleClick = (event, id) => {
+		const selectedIndex = selected.indexOf(id);
+		let newSelected = [];
 
-	// 	if (selectedIndex === -1) {
-	// 		newSelected = newSelected.concat(selected, id);
-	// 	} else if (selectedIndex === 0) {
-	// 		newSelected = newSelected.concat(selected.slice(1));
-	// 	} else if (selectedIndex === selected.length - 1) {
-	// 		newSelected = newSelected.concat(selected.slice(0, -1));
-	// 	} else if (selectedIndex > 0) {
-	// 		newSelected = newSelected.concat(
-	// 			selected.slice(0, selectedIndex),
-	// 			selected.slice(selectedIndex + 1)
-	// 		);
-	// 	}
-	// 	setSelected(newSelected);
-	// };
-
+		if (selectedIndex === -1) {
+			newSelected = newSelected.concat(selected, id);
+		} else if (selectedIndex === 0) {
+			newSelected = newSelected.concat(selected.slice(1));
+		} else if (selectedIndex === selected.length - 1) {
+			newSelected = newSelected.concat(selected.slice(0, -1));
+		} else if (selectedIndex > 0) {
+			newSelected = newSelected.concat(
+				selected.slice(0, selectedIndex),
+				selected.slice(selectedIndex + 1)
+			);
+		}
+		setSelected(newSelected);
+	};
+	console.log(selected);
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -332,9 +278,9 @@ export default function EnhancedTable() {
 		setPage(0);
 	};
 
-	// const handleChangeDense = (event) => {
-	// 	setDense(event.target.checked);
-	// };
+	const handleChangeDense = (event) => {
+		setDense(event.target.checked);
+	};
 
 	const isSelected = (id) => selected.indexOf(id) !== -1;
 
@@ -344,22 +290,23 @@ export default function EnhancedTable() {
 
 	const visibleRows = React.useMemo(
 		() =>
-			stableSort(rows, getComparator(order, orderBy)).slice(
+			stableSort(rows, getComparator(order, orderBy))?.slice(
 				page * rowsPerPage,
 				page * rowsPerPage + rowsPerPage
 			),
-		[order, orderBy, page, rowsPerPage]
+		[order, orderBy, page, rowsPerPage, rows]
 	);
 
 	return (
-		<Box sx={{ width: "100%", margin: "  1rem 0 1rem 0", padding: "2rem" }}>
-			<Paper sx={{ width: "100%", m: 2, p: 2 }}>
+		<Box sx={{ width: "100%", margin: "0", padding: "2rem" }}>
+			<Paper sx={{ width: "100%", marginTop: 7}}>
 				<EnhancedTableToolbar numSelected={selected.length} />
 				<TableContainer>
 					<Table
 						sx={{ minWidth: 750 }}
 						aria-labelledby="tableTitle"
 						size={"medium"}
+						stickyHeader
 					>
 						<EnhancedTableHead
 							numSelected={selected.length}
@@ -370,22 +317,30 @@ export default function EnhancedTable() {
 							rowCount={rows.length - 2}
 						/>
 						<TableBody>
-							{visibleRows.map((row, index) => {
+							{visibleRows?.map((row, index) => {
 								const isItemSelected = isSelected(row.id);
-								// const labelId = `enhanced-table-checkbox-${index}`;
+								const labelId = `enhanced-table-checkbox-${index}`;
 
 								return (
 									<TableRow
 										hover
-										// onClick={(event) => handleClick(event, row.id)}
-										// role="checkbox"
+										onClick={(event) => handleClick(event, row.id)}
+										role="checkbox"
 										aria-checked={isItemSelected}
 										tabIndex={-1}
 										key={row.id}
 										selected={isItemSelected}
 										sx={{ cursor: "pointer" }}
 									>
-										<TableCell align="right"></TableCell>
+										<TableCell padding="checkbox">
+											<Checkbox
+												color="primary"
+												checked={isItemSelected}
+												inputProps={{
+													"aria-labelledby": labelId,
+												}}
+											/>
+										</TableCell>
 
 										<TableCell align="right">{row.location}</TableCell>
 										<TableCell align="right">{row.status}</TableCell>
@@ -396,10 +351,10 @@ export default function EnhancedTable() {
 										<TableCell align="right">{row.city}</TableCell>
 										<TableCell align="right">{row.province}</TableCell>
 										<TableCell
-											// component="th"
-											// id={labelId}
-											// scope="row"
-											// padding="none"
+											component="th"
+											id={labelId}
+											scope="row"
+											padding="none"
 											align="right"
 											// sx={{ backgroundColor: "red" }}
 										>
@@ -410,9 +365,9 @@ export default function EnhancedTable() {
 							})}
 							{emptyRows > 0 && (
 								<TableRow
-								// style={{
-								// 	height: (dense ? 33 : 53) * emptyRows,
-								// }}
+									style={{
+										height: (dense ? 33 : 53) * emptyRows,
+									}}
 								>
 									<TableCell colSpan={6} />
 								</TableRow>
@@ -433,15 +388,17 @@ export default function EnhancedTable() {
 					labelRowsPerPage="تعداد ردیف"
 				></TablePagination>
 			</Paper>
-			{/* <FormControlLabel
-					control={
+			<FormControlLabel
+				control={
 					<Switch
-					checked={dense}
-					onChange={handleChangeDense}
+						checked={dense}
+						onChange={handleChangeDense}
 					/>
 				}
 				label="Dense padding"
-				/> */}
+			/>
+
+			<Test data={rows} />
 		</Box>
 	);
 }

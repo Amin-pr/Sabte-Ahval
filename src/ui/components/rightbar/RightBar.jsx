@@ -6,7 +6,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CssBaseline from "@mui/material/CssBaseline";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -15,33 +14,33 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
 import { FeedOutlined, VerifiedUser } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
 const drawerWidth = 240;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
-	({ theme, open }) => ({
-		flexGrow: 1,
-		padding: theme.spacing(3),
-		transition: theme.transitions.create("margin", {
-			easing: theme.transitions.easing.sharp,
-			duration: theme.transitions.duration.leavingScreen,
-		}),
-		marginRight: -drawerWidth,
-		...(open && {
-			transition: theme.transitions.create("margin", {
-				easing: theme.transitions.easing.easeOut,
-				duration: theme.transitions.duration.enteringScreen,
-			}),
-			marginRight: 0,
-		}),
+// const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+// 	({ theme, open }) => ({
+// 		flexGrow: 1,
+// 		padding: theme.spacing(3),
+// 		transition: theme.transitions.create("margin", {
+// 			easing: theme.transitions.easing.sharp,
+// 			duration: theme.transitions.duration.leavingScreen,
+// 		}),
+// 		marginRight: -drawerWidth,
+// 		...(open && {
+// 			transition: theme.transitions.create("margin", {
+// 				easing: theme.transitions.easing.easeOut,
+// 				duration: theme.transitions.duration.enteringScreen,
+// 			}),
+// 			marginRight: 0,
+// 		}),
 
-		position: "relative",
-	})
-);
+// 		position: "relative",
+// 	})
+// );
 
 const AppBar = styled(MuiAppBar, {
 	shouldForwardProp: (prop) => prop !== "open",
@@ -91,7 +90,6 @@ export default function PersistentDrawerRight() {
 				<Toolbar>
 					<Box
 						variant="h6"
-						noWrap
 						sx={{ flexGrow: 1 }}
 						component="div"
 					>
@@ -139,36 +137,39 @@ export default function PersistentDrawerRight() {
 					دفاتر
 				</Divider>
 				<List>
+					<Link
+						to="/table"
+						relative="path"
+					>
+						<ListItem
+							disablePadding
+							className="listItem"
+						>
+							<ListItemButton
+								className="listItem"
+								sx={{ justifyContent: "end" }}
+							>
+								<p>اطلاعات دفاتر</p>
+								<ListItemIcon>
+									<FeedOutlined />
+								</ListItemIcon>
+							</ListItemButton>
+						</ListItem>
+					</Link>
 					<ListItem
 						disablePadding
-						alignItems="flex-start"
+						// sx={{ justifyContent: "end" }}
 					>
-						<ListItemButton alignItems="center">
-							<p>اطلاعات دفاتر</p>
+						<ListItemButton sx={{ justifyContent: "end" }}>
+							<p>سوابق دفاتر</p>
 							<ListItemIcon>
 								<FeedOutlined />
 							</ListItemIcon>
 						</ListItemButton>
 					</ListItem>
-					<ListItem
-						disablePadding
-						sx={{ justifyContent: "end" }}
-					>
-						<ListItemButton>
-							{/* <ListItemText primary="سوابق دفاتر" /> */}
-							<p>سوابق دفاتر"</p>
-							<ListItemIcon>
-								<FeedOutlined />
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-					<ListItem
-						disablePadding
-						sx={{ justifyContent: "end" }}
-					>
-						<ListItemButton>
-							{/* <ListItemText primary="نتایج نظرسنجی" /> */}
-							<p>نتایج نظرسنجی"</p>
+					<ListItem disablePadding>
+						<ListItemButton sx={{ justifyContent: "end" }}>
+							<p>نتایج نظرسنجی</p>
 							<ListItemIcon>
 								<FeedOutlined />
 							</ListItemIcon>
@@ -183,7 +184,7 @@ export default function PersistentDrawerRight() {
 				</Divider>
 				<List>
 					<ListItem disablePadding>
-						<ListItemButton>
+						<ListItemButton sx={{ justifyContent: "end" }}>
 							<p>لیست تعرفه ها</p>
 							<ListItemIcon>
 								<ChecklistRtlOutlinedIcon />
@@ -198,14 +199,19 @@ export default function PersistentDrawerRight() {
 					کاربران
 				</Divider>
 				<List>
-					<ListItem disablePadding>
-						<ListItemButton>
-							<p>مدیریت کاربران</p>
-							<ListItemIcon>
-								<ChecklistRtlOutlinedIcon />
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
+					<Link
+						to="/login"
+						relative="path"
+					>
+						<ListItem disablePadding>
+							<ListItemButton sx={{ justifyContent: "end" }}>
+								<p>مدیریت کاربران</p>
+								<ListItemIcon>
+									<ChecklistRtlOutlinedIcon />
+								</ListItemIcon>
+							</ListItemButton>
+						</ListItem>
+					</Link>
 				</List>
 			</Drawer>
 		</Box>
