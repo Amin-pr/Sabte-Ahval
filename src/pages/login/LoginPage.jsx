@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +12,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
+import { useState } from "react";
+import { useLogin } from "../../hooks/useLogin";
 
 // function Copyright(props) {
 // 	return (
@@ -23,13 +24,15 @@ import theme from "../../ui/theme/theme";
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignInSide() {
+	const [userName, setUserName] = useState("");
+	const [password, setPassword] = useState();
+	const [userInfo, setUserInfo] = useState();
+
+	const { login, isLoading } = useLogin(setUserInfo);
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get("email"),
-			password: data.get("password"),
-		});
+		login({ email: userName, password: password });
 	};
 
 	return (
@@ -99,6 +102,7 @@ export default function SignInSide() {
 								variant="outlined"
 								InputLabelProps={{ style: { fontWeight: "700" } }}
 								InputProps={{ style: { fontWeight: "700" } }}
+								onChange={(e) => setUserName(e.target.value)}
 							/>
 							<TextField
 								dir="rtl"
@@ -111,6 +115,7 @@ export default function SignInSide() {
 								id="password"
 								autoComplete="current-password"
 								InputLabelProps={{ style: { fontWeight: "700" } }}
+								onChange={(e) => setPassword(e.target.value)}
 							/>
 							{/* <FormControlLabel
 								control={

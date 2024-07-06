@@ -6,6 +6,9 @@ import User from "./pages/user/User";
 import SignInSide from "./pages/login/LoginPage";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./ui/theme/theme";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 	function createData(
@@ -295,14 +298,18 @@ function App() {
 		},
 	]);
 	console.log(theme);
+	const queryClient = new QueryClient();
 
 	return (
 		<div className="app">
-			<RouterProvider router={router}>
-				<ThemeProvider theme={theme}>
-					<Dashboard />
-				</ThemeProvider>
-			</RouterProvider>
+			<ToastContainer />
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router}>
+					<ThemeProvider theme={theme}>
+						<Dashboard />
+					</ThemeProvider>
+				</RouterProvider>
+			</QueryClientProvider>
 		</div>
 	);
 }
