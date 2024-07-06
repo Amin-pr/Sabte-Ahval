@@ -2,18 +2,19 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import SupaBase from "../../api/SupaBase";
+import Loading from "../../ui/components/loading/Loading";
 
 // function Copyright(props) {
 // 	return (
@@ -21,22 +22,41 @@ import { useLogin } from "../../hooks/useLogin";
 // 	);
 // }
 
+async function getUser() {
+	const {
+		data: { user },
+	} = await SupaBase.auth.getUser();
+	return user;
+}
+
 // TODO remove, this demo shouldn't need to reset the theme.
 
 export default function SignInSide() {
-	const [userName, setUserName] = useState("");
+	//invalidating any existing user
+	const queryClient = useQueryClient();
+	const { isError, error } = useQuery({
+		queryKey: ["userInfo"], // Unique key for the query
+		queryFn: () => queryClient.invalidateQueries(["useInfo"]), 
+	});
+
+	console.log(error, isError);
+
+	const [userName, setUserName] = useState();
 	const [password, setPassword] = useState();
-	const [userInfo, setUserInfo] = useState();
 
-	const { login, isLoading } = useLogin(setUserInfo);
+	const { login, isLoading } = useLogin();
 
+	//query Login
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		login({ email: userName, password: password });
 	};
+	// const isLoading = true;
+	console.log(isLoading);
 
 	return (
 		<ThemeProvider theme={theme}>
+			{isLoading && <Loading text={"در حال اتصال"} />}
 			<Grid
 				container
 				component="main"
@@ -74,7 +94,7 @@ export default function SignInSide() {
 							alignItems: "center",
 						}}
 					>
-						<Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+						<Avatar sx={{ m: 3, p: 2, width: "5rem", height: "5rem" }}>
 							<LockOutlinedIcon />
 						</Avatar>
 						<Typography
@@ -87,7 +107,7 @@ export default function SignInSide() {
 							component="form"
 							noValidate
 							onSubmit={handleSubmit}
-							sx={{ mt: 1 }}
+							sx={{ mt: 3 }}
 						>
 							<TextField
 								margin="normal"
@@ -130,7 +150,7 @@ export default function SignInSide() {
 								type="submit"
 								fullWidth
 								variant="contained"
-								sx={{ mt: 3, mb: 2 }}
+								sx={{ mt: 3, mb: 3 }}
 							>
 								<Typography
 									variant="p"
@@ -145,26 +165,33 @@ export default function SignInSide() {
 								<Grid
 									item
 									xs
+									sx={{ my: 8 }}
 								>
 									<Link
 										href="#"
 										variant="a"
 										fontSize={"20px"}
+										sx={{ textDecoration: "none", color: "error" }}
 									>
 										فراموشی رمز عبور
 									</Link>
 								</Grid>
-
-								<Typography
-									variant="p"
-									color="text.secondary"
-									align="right"
-									fontWeight={"600"}
-									sx={{ margin: "2rem auto" }}
-								>
-									کلیه حقوق این سایت متعلق به شرکت فن آوران اطلاعات ایرانیاین
-									میباشد
-								</Typography>
+								<Grid item>
+									<Typography
+										variant="p"
+										color="text.secondary"
+										// align="right"
+										fontWeight={"800"}
+										sx={{
+											margin: "4rem auto",
+											// textAlign: "right",
+											// direction: "rtl",
+										}}
+									>
+										کلیه حقوق این سایت متعلق به شرکت فن آوران اطلاعات ایرانیاین
+										میباشد
+									</Typography>
+								</Grid>
 							</Grid>
 						</Box>
 					</Box>

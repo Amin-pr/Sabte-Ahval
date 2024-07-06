@@ -9,6 +9,7 @@ import theme from "./ui/theme/theme";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 function App() {
 	function createData(
@@ -281,8 +282,9 @@ function App() {
 	];
 
 	const router = createBrowserRouter([
+		{ path: "/", element: <SignInSide /> },
 		{
-			path: "/",
+			path: "/dashboard",
 			element: <Dashboard />,
 			children: [
 				{
@@ -304,6 +306,7 @@ function App() {
 		<div className="app">
 			<ToastContainer />
 			<QueryClientProvider client={queryClient}>
+				<ReactQueryDevtools initialIsOpen={false} />
 				<RouterProvider router={router}>
 					<ThemeProvider theme={theme}>
 						<Dashboard />

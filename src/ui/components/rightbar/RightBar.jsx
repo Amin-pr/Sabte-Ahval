@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -15,7 +16,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import { FeedOutlined, VerifiedUser } from "@mui/icons-material";
+
+import {
+	FeedOutlined,
+	Person,
+	Person3,
+	PersonOutline,
+	VerifiedUser,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
@@ -68,7 +76,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight({ userInfo }) {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
@@ -79,7 +87,7 @@ export default function PersistentDrawerRight() {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
-
+	console.log(userInfo);
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -87,20 +95,19 @@ export default function PersistentDrawerRight() {
 				position="fixed"
 				open={open}
 			>
-				<Toolbar>
+				<Toolbar sx={{ bgcolor: "rgb(0, 103, 16)" }}>
 					<Box
 						variant="h6"
 						sx={{ flexGrow: 1 }}
 						component="div"
 					>
-						{/* {username} */}
-						<VerifiedUser />
-						users name
+						<Person />
+						{userInfo?.email}
 					</Box>
 					<IconButton
 						color="inherit"
 						aria-label="open drawer"
-						edge="end"
+						edge="start"
 						onClick={handleDrawerOpen}
 						sx={{ ...(open && { display: "none" }) }}
 					>
@@ -115,8 +122,10 @@ export default function PersistentDrawerRight() {
 					flexShrink: 0,
 					"& .MuiDrawer-paper": {
 						width: drawerWidth,
+						transitionDuration: 500,
 					},
 				}}
+				transitionDuration={500}
 				variant="persistent"
 				anchor="right"
 				open={open}
@@ -132,23 +141,20 @@ export default function PersistentDrawerRight() {
 				</DrawerHeader>
 				<Divider
 					textAlign="right"
-					className="font"
+					className={styles.Divider}
 				>
 					دفاتر
 				</Divider>
 				<List>
 					<Link
-						to="/table"
+						to="table"
 						relative="path"
 					>
 						<ListItem
 							disablePadding
 							className="listItem"
 						>
-							<ListItemButton
-								className="listItem"
-								sx={{ justifyContent: "end" }}
-							>
+							<ListItemButton className={styles.listItem}>
 								<p>اطلاعات دفاتر</p>
 								<ListItemIcon>
 									<FeedOutlined />
@@ -156,11 +162,8 @@ export default function PersistentDrawerRight() {
 							</ListItemButton>
 						</ListItem>
 					</Link>
-					<ListItem
-						disablePadding
-						// sx={{ justifyContent: "end" }}
-					>
-						<ListItemButton sx={{ justifyContent: "end" }}>
+					<ListItem disablePadding>
+						<ListItemButton className={styles.listItem}>
 							<p>سوابق دفاتر</p>
 							<ListItemIcon>
 								<FeedOutlined />
@@ -168,7 +171,7 @@ export default function PersistentDrawerRight() {
 						</ListItemButton>
 					</ListItem>
 					<ListItem disablePadding>
-						<ListItemButton sx={{ justifyContent: "end" }}>
+						<ListItemButton className={styles.listItem}>
 							<p>نتایج نظرسنجی</p>
 							<ListItemIcon>
 								<FeedOutlined />
@@ -178,13 +181,13 @@ export default function PersistentDrawerRight() {
 				</List>
 				<Divider
 					textAlign="right"
-					className="font"
+					className={styles.Divider}
 				>
 					مالی
 				</Divider>
 				<List>
 					<ListItem disablePadding>
-						<ListItemButton sx={{ justifyContent: "end" }}>
+						<ListItemButton className={styles.listItem}>
 							<p>لیست تعرفه ها</p>
 							<ListItemIcon>
 								<ChecklistRtlOutlinedIcon />
@@ -194,7 +197,7 @@ export default function PersistentDrawerRight() {
 				</List>
 				<Divider
 					textAlign="right"
-					className="font"
+					className={styles.Divider}
 				>
 					کاربران
 				</Divider>
@@ -204,7 +207,7 @@ export default function PersistentDrawerRight() {
 						relative="path"
 					>
 						<ListItem disablePadding>
-							<ListItemButton sx={{ justifyContent: "end" }}>
+							<ListItemButton className={styles.listItem}>
 								<p>مدیریت کاربران</p>
 								<ListItemIcon>
 									<ChecklistRtlOutlinedIcon />
