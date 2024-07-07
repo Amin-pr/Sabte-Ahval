@@ -9,15 +9,19 @@ export function useLogin() {
 	const { mutate: login, isPending } = useMutation({
 		mutationFn: (email, password) => Login(email, password),
 		onSuccess: (data) => {
-			toast.success("خوش آمدید");
 			console.log(data);
-			navigate("/dashboard");
-			queryClient.setQueryData(["userInfo"], data);
+			if (data.code === 201) {
+				queryClient.setQueryData(["userInfo"], data);
+				navigate("/dashboard");
+				toast.success("خوش آمدید");
+			} else if (data.code !== 201) {
+				toast.error(data.message);
+			}
 		},
 		onError: (err) => {
 			console.log(err);
 			toast.error(err.message);
 		},
 	});
-	return { login, isLoading:isPending };
+	return { login, isLoading: isPending };
 }

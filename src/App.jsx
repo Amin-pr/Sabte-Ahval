@@ -1,4 +1,4 @@
-import Dashboard from "./pages/Dashboard/Dashboard";
+import Dashboard from "./pages/Dashboard/DashboardLayout";
 import "./app.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TableComp from "./ui/components/table/TableComp";
@@ -10,7 +10,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
+import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems";
+import FFtech from "../src/FFtech";
 function App() {
 	function createData(
 		id,
@@ -37,6 +38,63 @@ function App() {
 			status,
 		};
 	}
+
+	const headCells = [
+		{
+			id: "status",
+			numeric: false,
+			disablePadding: false,
+			label: "وضعیت",
+		},
+		{
+			id: "location",
+			numeric: false,
+			disablePadding: false,
+			label: "مکان",
+		},
+		{
+			id: "rank",
+			numeric: true,
+			disablePadding: false,
+			label: "رتبه",
+		},
+		{
+			id: "score",
+			numeric: true,
+			disablePadding: false,
+			label: "امتیاز",
+		},
+		{
+			id: "officeCode",
+			numeric: true,
+			disablePadding: false,
+			label: "کد دفتر",
+		},
+		{
+			id: "session",
+			numeric: true,
+			disablePadding: false,
+			label: "دوره",
+		},
+		{
+			id: "city",
+			numeric: false,
+			disablePadding: false,
+			label: "شهر",
+		},
+		{
+			id: "province",
+			numeric: false,
+			disablePadding: true,
+			label: "استان",
+		},
+		{
+			id: "Num",
+			numeric: true,
+			disablePadding: true,
+			label: "ردیف",
+		},
+	];
 
 	const rows = [
 		{
@@ -282,23 +340,33 @@ function App() {
 	];
 
 	const router = createBrowserRouter([
-		{ path: "/", element: <SignInSide /> },
+		{ path: "/Login", element: <SignInSide /> },
 		{
-			path: "/dashboard",
+			path: "/",
 			element: <Dashboard />,
 			children: [
 				{
 					path: "table",
-					element: <TableComp rows={rows} />,
+					element: (
+						<TableComp
+							rows={rows}
+							headCells={headCells}
+						/>
+					),
 				},
 				{
-					path: "user management",
+					path: "user managment",
 					element: <User />,
 				},
 				{ path: "login", element: <SignInSide /> },
+				{ path: "dashboard", element: <Dashboarditems /> },
+				// { path: "dashboard", element: <FFtech /> },
 			],
 		},
 	]);
+
+
+	
 	console.log(theme);
 	const queryClient = new QueryClient();
 

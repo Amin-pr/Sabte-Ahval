@@ -1,5 +1,5 @@
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
@@ -10,17 +10,11 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import SupaBase from "../../api/SupaBase";
 import Loading from "../../ui/components/loading/Loading";
-
-// function Copyright(props) {
-// 	return (
-
-// 	);
-// }
 
 async function getUser() {
 	const {
@@ -29,17 +23,23 @@ async function getUser() {
 	return user;
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
 export default function SignInSide() {
-	//invalidating any existing user
 	const queryClient = useQueryClient();
-	const { isError, error } = useQuery({
-		queryKey: ["userInfo"], // Unique key for the query
-		queryFn: () => queryClient.invalidateQueries(["useInfo"]), 
-	});
 
-	console.log(error, isError);
+	// const { isError, error } = useQuery({
+	// 	queryKey: ["userInfo"],
+
+	// });
+
+	//invalidating any existing user
+	useEffect[
+		(() => {
+			queryClient.removeQueries(["useInfo"]);
+		},
+		[])
+	];
+
+	// console.log(error, isError);
 
 	const [userName, setUserName] = useState();
 	const [password, setPassword] = useState();
@@ -61,6 +61,7 @@ export default function SignInSide() {
 				container
 				component="main"
 				sx={{ height: "100vh" }}
+				overflow={"hidden"}
 			>
 				<CssBaseline />
 				<Grid

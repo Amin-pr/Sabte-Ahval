@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import * as React from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -16,17 +15,18 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-
 import {
 	FeedOutlined,
+	HomeMax,
+	HomeRounded,
 	Person,
-	Person3,
-	PersonOutline,
-	VerifiedUser,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import getUser from "../../../hooks/UseGetUser";
 const drawerWidth = 240;
 
 // const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -76,9 +76,16 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 	justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight({ userInfo }) {
+export default function PersistentDrawerRight() {
+	// const queryClient = useQueryClient();
+	const { data: userInfo, error } = useQuery({
+		queryKey: ["userInfo"],
+		queryFn: getUser,
+		staleTime: 50005,
+	});
+
 	const theme = useTheme();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -87,7 +94,6 @@ export default function PersistentDrawerRight({ userInfo }) {
 	const handleDrawerClose = () => {
 		setOpen(false);
 	};
-	console.log(userInfo);
 	return (
 		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
@@ -95,7 +101,7 @@ export default function PersistentDrawerRight({ userInfo }) {
 				position="fixed"
 				open={open}
 			>
-				<Toolbar sx={{ bgcolor: "rgb(0, 103, 16)" }}>
+				<Toolbar sx={{ bgcolor: "rgb(0, 103, 16)", height: "4rem" }}>
 					<Box
 						variant="h6"
 						sx={{ flexGrow: 1 }}
@@ -139,6 +145,30 @@ export default function PersistentDrawerRight({ userInfo }) {
 						)}
 					</IconButton>
 				</DrawerHeader>
+
+				<Divider
+					textAlign="right"
+					className={styles.Divider}
+				></Divider>
+				<List>
+					<Link
+						to="/dashboard"
+						relative="path"
+					>
+						<ListItem
+							disablePadding
+							className="listItem"
+						>
+							<ListItemButton className={styles.listItem}>
+								<p> خانه </p>
+								<ListItemIcon>
+									<HomeRounded />
+								</ListItemIcon>
+							</ListItemButton>
+						</ListItem>
+					</Link>
+				</List>
+
 				<Divider
 					textAlign="right"
 					className={styles.Divider}
@@ -203,7 +233,7 @@ export default function PersistentDrawerRight({ userInfo }) {
 				</Divider>
 				<List>
 					<Link
-						to="/login"
+						to="/user managment"
 						relative="path"
 					>
 						<ListItem disablePadding>
