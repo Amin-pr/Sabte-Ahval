@@ -35,6 +35,9 @@ function descendingComparator(a, b, orderBy) {
 	}
 	return 0;
 }
+
+//gets 2 prop rows and heads
+
 export default function EnhancedTable({ rows, headCells }) {
 	function getComparator(order, orderBy) {
 		return order === "desc"
@@ -42,10 +45,6 @@ export default function EnhancedTable({ rows, headCells }) {
 			: (a, b) => -descendingComparator(a, b, orderBy);
 	}
 
-	// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-	// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-	// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-	// with exampleArray.slice().sort(exampleComparator)
 	function stableSort(array, comparator) {
 		const stabilizedThis = array?.map((el, index) => [el, index]);
 		stabilizedThis?.sort((a, b) => {
@@ -71,13 +70,25 @@ export default function EnhancedTable({ rows, headCells }) {
 			onRequestSort(event, property);
 		};
 
+		console.log(rowCount, numSelected, selected);
+
 		return (
 			<TableHead>
 				<TableRow>
 					<TableCell
 						padding="checkbox"
 						sx={{ bgcolor: "red" }}
-					></TableCell>
+					>
+						<Checkbox
+							color="primary"
+							indeterminate={numSelected > 0 && numSelected < rowCount}
+							checked={rowCount > 0 && numSelected === rowCount}
+							onChange={onSelectAllClick}
+							inputProps={{
+								"aria-label": "select all desserts",
+							}}
+						/>
+					</TableCell>
 					{headCells.map((headCell) => (
 						<TableCell
 							sx={{ bgcolor: "red" }}
@@ -218,7 +229,6 @@ export default function EnhancedTable({ rows, headCells }) {
 		}
 		setSelected(newSelected);
 	};
-	console.log(selected);
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage);
 	};
@@ -264,7 +274,7 @@ export default function EnhancedTable({ rows, headCells }) {
 							orderBy={orderBy}
 							onSelectAllClick={handleSelectAllClick}
 							onRequestSort={handleRequestSort}
-							rowCount={rows.length - 2}
+							rowCount={rows.length}
 						/>
 						<TableBody>
 							{visibleRows?.map((row, index) => {
@@ -388,7 +398,7 @@ export default function EnhancedTable({ rows, headCells }) {
 				label="Dense padding"
 			/>
 
-			<Test data={rows} />
+			<Test data={selected} />
 		</Box>
 	);
 }

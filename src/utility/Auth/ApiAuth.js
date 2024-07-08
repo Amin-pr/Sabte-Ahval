@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import SupaBase from "../../api/SupaBase";
 
 export async function Login({ email, password }) {
