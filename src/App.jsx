@@ -154,14 +154,13 @@ function App() {
 			type: "number",
 			width: 110,
 			editable: true,
-			
 		},
 	];
 
 	const rows = [
 		{
 			id: 1,
-			num: 1,
+
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -173,7 +172,7 @@ function App() {
 		},
 		{
 			id: 2,
-			num: 1,
+
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -185,7 +184,7 @@ function App() {
 		},
 		{
 			id: 3,
-			num: 1,
+
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -197,7 +196,7 @@ function App() {
 		},
 		{
 			id: 4,
-			num: 1,
+
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -206,8 +205,8 @@ function App() {
 			rank: 4.3,
 			status: "فعال",
 			location: "شسی",
-			
-		}]
+		},
+	];
 	// 	{
 	// 		id: 5,
 	// 		num: 1,
@@ -328,7 +327,7 @@ function App() {
 	// 		status: "فعال",
 	// 		location: "شسی",
 	// 	},
-	// 
+	//
 	// ];
 
 	const router = createBrowserRouter([
@@ -339,7 +338,12 @@ function App() {
 			children: [
 				{
 					path: "table",
-					element: <DataTable columns={columns} rows={rows}/>,
+					element: (
+						<DataTable
+							columns={columns}
+							rows={rows}
+						/>
+					),
 				},
 				{
 					path: "user managment",
