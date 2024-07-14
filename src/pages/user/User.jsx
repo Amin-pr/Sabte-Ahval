@@ -2,6 +2,8 @@ import styles from "./User.module.scss";
 
 import TableComp from "../../ui/components/table/TableComp";
 import { useState } from "react";
+import DataTable from "../../ui/components/table/DataGrid";
+import CreateUserForm from "../../ui/components/createUserForm/CreastUserForm";
 function User() {
 	const rows = [
 		{
@@ -29,10 +31,11 @@ function User() {
 	const [users, setUsers] = useState();
 	return (
 		<div className={styles.holder}>
-			<TableComp
+			{/* <DataTable
 				rows={rows}
-				headCells={headCells}
-			/>
+				columns={headCells}
+			/> */}
+			<CreateUserForm />
 		</div>
 	);
 }

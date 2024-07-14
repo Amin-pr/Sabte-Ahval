@@ -10,36 +10,34 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
-import { useEffect, useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import SupaBase from "../../api/SupaBase";
 import Loading from "../../ui/components/loading/Loading";
+import { useState } from "react";
 
-async function getUser() {
-	const {
-		data: { user },
-	} = await SupaBase.auth.getUser();
-	return user;
-}
+// async function getUser() {
+// 	const {
+// 		data: { user },
+// 	} = await SupaBase.auth.getUser();
+// 	return user;
+// }
 
 export default function SignInSide() {
 	const queryClient = useQueryClient();
 
-	// const { isError, error } = useQuery({
-	// 	queryKey: ["userInfo"],
-
-	// });
+	const { data, isError, error } = useQuery({
+		queryKey: ["userInfo"],
+	});
 
 	//invalidating any existing user
-	useEffect[
-		(() => {
-			queryClient.removeQueries(["useInfo"]);
-		},
-		[])
-	];
+	// useEffect[
+	// 	(() => {
+	// 		queryClient.removeQueries(["useInfo"]);
+	// 	},
+	// 	[])
+	// ];
 
-	// console.log(error, isError);
+	console.log(error, isError, data);
 
 	const [userName, setUserName] = useState();
 	const [password, setPassword] = useState();

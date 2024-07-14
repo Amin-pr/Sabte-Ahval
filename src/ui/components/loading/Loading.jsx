@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Box, CircularProgress, Typography } from "@mui/material";
 
 function Loading({ text }) {
@@ -5,8 +6,8 @@ function Loading({ text }) {
 		<Box
 			display={"flex"}
 			position={"absolute"}
-			width={"100vw"}
-			height={"100vh"}
+			width={"100%"}
+			height={"100%"}
 			// bgcolor={"red"}
 			alignContent={"center"}
 			justifyItems={"center"}

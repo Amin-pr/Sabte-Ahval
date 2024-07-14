@@ -8,18 +8,7 @@ import { toast } from "react-toastify";
 import { Slide } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 function Dashboard() {
-	const queryClient = useQueryClient();
-	const {
-		data: userInfo,
-		error,
-		isLoading,
-	} = useQuery({
-		queryKey: ["userInfo"],
-		queryFn: getUser,
-		staleTime: 50005,
-	});
-
-	error && toast(error.message);
+	// error && toast(error.message);
 	return (
 		<>
 			<CssBaseline />
@@ -29,9 +18,9 @@ function Dashboard() {
 				timeout={500}
 			>
 				<div className={styles.holder}>
-					{isLoading && <Loading text={"لطفا صبر کنید..."} />}
+					{/* {isLoading && <Loading text={"لطفا صبر کنید..."} />} */}
 					{/* <Navbar><ToggleButton>asdaddddd</ToggleButton></Navbar> */}
-					<RightBar userInfo={userInfo}></RightBar>
+					<RightBar ></RightBar>
 					<Outlet />
 					{/* <TableComp /> */}
 				</div>

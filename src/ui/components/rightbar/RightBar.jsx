@@ -80,7 +80,7 @@ export default function PersistentDrawerRight() {
 	// const queryClient = useQueryClient();
 	const { data: userInfo, error } = useQuery({
 		queryKey: ["userInfo"],
-		queryFn: getUser,
+		// queryFn: getUser,
 		staleTime: 50005,
 	});
 

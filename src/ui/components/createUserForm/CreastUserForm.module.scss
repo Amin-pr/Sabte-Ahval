@@ -1,0 +1,15 @@
+@import "../../theme/color/_Color";
+
+.holder {
+	// background-color: $primaryColor;
+	max-height: "40px";
+	display: "flex !important";
+	flex-direction: "row !important";
+	flex-wrap: "wrap !important";
+	justify-content: "space-around !important";
+	align-items: "center !important";
+}
+
+.form {
+	border-color: $primaryColor;
+}
