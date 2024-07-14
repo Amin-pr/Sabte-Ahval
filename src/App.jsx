@@ -351,7 +351,7 @@ function App() {
 				},
 				{ path: "login", element: <SignInSide /> },
 				{ path: "dashboard/:token", element: <Dashboarditems /> },
-				// { path: "dashboard", element: <FFtech /> },
+				// { path: "dashboard", element: <FFtech /> }
 			],
 		},
 	]);
