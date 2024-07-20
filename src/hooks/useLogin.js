@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export function useLogin() {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
-	let { token } = useParams();
 
 	const { mutate: login, isPending } = useMutation({
 		mutationFn: (username, password) => Login(username, password),
@@ -17,8 +16,13 @@ export function useLogin() {
 
 				console.log(data.data.access_token);
 				queryClient.setQueryData(["userInfo"], data);
-				navigate(`/dashboard/:${data.data.access_token}`);
-				toast.success("خوش آمدید");
+				navigate(`/dashboard`, {
+					state: {
+						token: data.data.access_token,
+						name: data.data.name,
+					},
+				});
+				toast.success(` ${data.data.name} خوش آمدی`);
 			} else if (data.code !== 201) {
 				toast.error(data.message);
 			}

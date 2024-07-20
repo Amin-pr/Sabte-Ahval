@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import RightBar from "../../ui/components/rightbar/RightBar";
 import styles from "./DashboardLayout.module.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import getUser from "../../hooks/UseGetUser";
 import Loading from "../../ui/components/loading/Loading";
 import { toast } from "react-toastify";
@@ -9,6 +9,9 @@ import { Slide } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 function Dashboard() {
 	// error && toast(error.message);
+	const location = useLocation();
+	const { state } = location;
+	console.log(state);
 	return (
 		<>
 			<CssBaseline />
@@ -20,7 +23,7 @@ function Dashboard() {
 				<div className={styles.holder}>
 					{/* {isLoading && <Loading text={"لطفا صبر کنید..."} />} */}
 					{/* <Navbar><ToggleButton>asdaddddd</ToggleButton></Navbar> */}
-					<RightBar ></RightBar>
+					<RightBar></RightBar>
 					<Outlet />
 					{/* <TableComp /> */}
 				</div>
