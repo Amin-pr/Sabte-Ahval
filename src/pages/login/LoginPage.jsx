@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
-import { useLogin } from "../../hooks/useLogin";
+import { UseLogin } from "../../hooks/UseLogin";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Loading from "../../ui/components/loading/Loading";
 import { useState } from "react";
@@ -23,7 +23,6 @@ import { useState } from "react";
 // }
 
 export default function SignInSide() {
-
 	const { data, isError, error } = useQuery({
 		queryKey: ["userInfo"],
 	});
@@ -41,7 +40,7 @@ export default function SignInSide() {
 	const [userName, setUserName] = useState();
 	const [password, setPassword] = useState();
 
-	const { login, isLoading } = useLogin();
+	const { login, isLoading } = UseLogin();
 
 	//query Login
 	const handleSubmit = (event) => {
