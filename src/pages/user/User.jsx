@@ -3,7 +3,7 @@ import styles from "./User.module.scss";
 import TableComp from "../../ui/components/table/TableComp";
 import { useState } from "react";
 import DataTable from "../../ui/components/table/DataGrid";
-import CreateUserForm from "../../ui/components/createUserForm/CreastUserForm";
+import CreateUserForm from "../../ui/components/createUserForm/CreatUserForm";
 function User() {
 	const rows = [
 		{

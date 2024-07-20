@@ -1,4 +1,4 @@
-import styles from "./CreastUserForm.module.scss";
+import styles from "./CreatUserForm.module.scss";
 import { useEffect, useState } from "react";
 import useRegister from "../../../hooks/UseCreateUser";
 import {
@@ -110,7 +110,6 @@ const CreateUserForm = () => {
 					<Button
 						type="submit"
 						variant="contained"
-						// sx={{ ":hover": { bgcolor: "primary" } }}
 						onClick={handleSubmit}
 					>
 						ساخت کاربر

@@ -13,8 +13,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems";
 import FFtech from "../src/FFtech";
 import DataTable from "./ui/components/table/DataGrid";
-// import rows from '../src/rows'
-// import rows from "./rows";
+
 function App() {
 	function createData(
 		id,
