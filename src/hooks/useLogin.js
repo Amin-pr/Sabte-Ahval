@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Login } from "../utility/Auth/ApiAuth";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export function UseLogin() {
@@ -16,7 +16,7 @@ export function UseLogin() {
 
 				console.log(data.data.access_token);
 				queryClient.setQueryData(["userInfo"], data);
-				navigate(`/dashboard`, {
+				navigate(`/`, {
 					state: {
 						token: data.data.access_token,
 						name: data.data.name,

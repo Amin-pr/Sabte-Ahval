@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../ui/theme/theme";
 import { UseLogin } from "../../hooks/UseLogin";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Loading from "../../ui/components/loading/Loading";
 import { useState } from "react";
 

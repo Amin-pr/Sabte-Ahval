@@ -19,7 +19,6 @@ function Dashboard() {
 					{/* <Navbar><ToggleButton>asdaddddd</ToggleButton></Navbar> */}
 					<RightBar ></RightBar>
 					<Outlet />
-					{/* <TableComp /> */}
 				</div>
 			</Slide>
 		</>

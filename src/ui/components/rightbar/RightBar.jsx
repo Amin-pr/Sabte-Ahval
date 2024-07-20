@@ -15,16 +15,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import {
-	FeedOutlined,
-	HomeMax,
-	HomeRounded,
-	Person,
-} from "@mui/icons-material";
+import { FeedOutlined, HomeRounded } from "@mui/icons-material";
 import { Link, useLocation } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserIcon from "../userIcon/UserIcon";
 const drawerWidth = 240;
 
@@ -76,13 +71,22 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight() {
+	// get access token and name
 	const location = useLocation();
 	const { state } = location;
+	const token = state?.token;
+	const [accessedToken, setAccessedToken] = useState();
+	
+	if (token) {
+		localStorage.setItem("accessToken", token);
+		useEffect[
+			() => (setAccessedToken(localStorage.getItem("accessToken")), [])
+		];
+	}
+	console.log(token, accessedToken);
 
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
-
-	console.log(state);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
