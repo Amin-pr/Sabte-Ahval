@@ -349,7 +349,7 @@ function App() {
 					element: <User />,
 				},
 				{ path: "login", element: <SignInSide /> },
-				{ path: "dashboard/:token", element: <Dashboarditems /> },
+				{ path: "dashboard", element: <Dashboarditems /> },
 				// { path: "dashboard", element: <FFtech /> }
 			],
 		},

@@ -21,12 +21,11 @@ import {
 	HomeRounded,
 	Person,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import getUser from "../../../hooks/UseGetUser";
+import UserIcon from "../userIcon/UserIcon";
 const drawerWidth = 240;
 
 // const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -77,15 +76,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight() {
-	// const queryClient = useQueryClient();
-	const { data: userInfo, error } = useQuery({
-		queryKey: ["userInfo"],
-		// queryFn: getUser,
-		staleTime: 50005,
-	});
+	const location = useLocation();
+	const { state } = location;
 
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
+
+	console.log(state);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -107,8 +104,10 @@ export default function PersistentDrawerRight() {
 						sx={{ flexGrow: 1 }}
 						component="div"
 					>
-						<Person />
-						{userInfo?.email}
+						<UserIcon
+							userName={state?.name}
+							token={state?.token}
+						/>
 					</Box>
 					<IconButton
 						color="inherit"

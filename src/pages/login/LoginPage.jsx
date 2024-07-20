@@ -23,7 +23,6 @@ import { useState } from "react";
 // }
 
 export default function SignInSide() {
-	const queryClient = useQueryClient();
 
 	const { data, isError, error } = useQuery({
 		queryKey: ["userInfo"],
