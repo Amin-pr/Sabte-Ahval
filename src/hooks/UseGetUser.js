@@ -7,11 +7,11 @@ export default function UseGetUser() {
 		isPending,
 		data,
 	} = useMutation({
-		mutationFn: () => GetUsers(),
+		mutationFn: GetUsers,
 		onSuccess: (data) => {
 			console.log(data.users.data);
 			if (data.code === 201) {
-				toast.success(data.users.data);
+				toast.success(data.message);
 			} else if (data.code !== 201) {
 				toast.error(data.message);
 			}

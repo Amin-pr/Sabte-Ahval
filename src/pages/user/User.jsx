@@ -7,6 +7,8 @@ import CreateUserForm from "../../ui/components/createUserForm/CreatUserForm";
 import UseGetUser from "../../hooks/UseGetUser";
 import { Button } from "@mui/material";
 function User() {
+	const token = localStorage.getItem("accessToken");
+
 	const rows = [
 		{
 			id: 1,
@@ -49,14 +51,17 @@ function User() {
 	];
 	const [users, setUsers] = useState();
 
-	const {  GetUser } = UseGetUser();
-	console.log(GetUser);
+	const { GetUser, data } = UseGetUser();
+
+	console.log(data, token);
 	return (
 		<div className={styles.holder}>
 			<Button
-				onClick={() => GetUser()}
+				onClick={() => GetUser(token)}
 				color="primary"
-			>asda</Button>
+			>
+				asda
+			</Button>
 			<DataTable
 				rows={rows}
 				columns={headCells}
