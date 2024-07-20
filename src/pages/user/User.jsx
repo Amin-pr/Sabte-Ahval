@@ -1,11 +1,12 @@
 import styles from "./User.module.scss";
 
 import TableComp from "../../ui/components/table/TableComp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DataTable from "../../ui/components/table/DataGrid";
 import CreateUserForm from "../../ui/components/createUserForm/CreatUserForm";
 import UseGetUser from "../../hooks/UseGetUser";
 import { Button } from "@mui/material";
+import { GetUsers } from "../../api/ApiGetUser";
 function User() {
 	const token = localStorage.getItem("accessToken");
 
@@ -31,33 +32,36 @@ function User() {
 			// editable: false,
 		},
 		{
-			field: "userName",
+			field: "username",
 			headerName: "نام کاربری",
 			width: 200,
 			// editable: true,
 		},
 		{
-			field: "phone",
+			field: "phone_number",
 			headerName: "تلفن",
 			width: 200,
 			// editable: true,
 		},
-		{
-			field: "ref_if",
-			headerName: "سطح دسترسی",
-			width: 200,
-			// editable: true,
-		},
+		// {
+		// 	field: "ref_if",
+		// 	headerName: "سطح دسترسی",
+		// 	width: 200,
+		// 	// editable: true,
+		// },
 	];
 	const [users, setUsers] = useState();
 
 	const { GetUser, data } = UseGetUser();
 
-	console.log(data, token);
+	useEffect(() => {
+		GetUser();
+	}, [GetUser]);
+	console.log(data?.data?.users?.data, token);
 	return (
 		<div className={styles.holder}>
 			<Button
-				onClick={() => GetUser(token)}
+				onClick={() => GetUser()}
 				color="primary"
 			>
 				asda

@@ -9,7 +9,7 @@ export default function UseGetUser() {
 	} = useMutation({
 		mutationFn: GetUsers,
 		onSuccess: (data) => {
-			console.log(data.users.data);
+			console.log(data.data.users.data);
 			if (data.code === 201) {
 				toast.success(data.message);
 			} else if (data.code !== 201) {
@@ -22,5 +22,5 @@ export default function UseGetUser() {
 			return err;
 		},
 	});
-	return { GetUser, isLoading: isPending, error: data };
+	return { GetUser, isLoading: isPending, data };
 }
