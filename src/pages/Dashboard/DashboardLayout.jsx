@@ -1,11 +1,14 @@
 import RightBar from "../../ui/components/rightbar/RightBar";
 import styles from "./DashboardLayout.module.scss";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import { Slide } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 function Dashboard() {
 	// error && toast(error.message);
+
+
+
 	return (
 		<>
 			<CssBaseline />
@@ -17,7 +20,7 @@ function Dashboard() {
 				<div className={styles.holder}>
 					{/* {isLoading && <Loading text={"لطفا صبر کنید..."} />} */}
 					{/* <Navbar><ToggleButton>asdaddddd</ToggleButton></Navbar> */}
-					<RightBar ></RightBar>
+					<RightBar></RightBar>
 					<Outlet />
 				</div>
 			</Slide>

@@ -16,7 +16,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
 import { FeedOutlined, HomeRounded } from "@mui/icons-material";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
 import { useEffect, useState } from "react";
@@ -72,19 +72,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerRight() {
 	// get access token and name
-	const location = useLocation();
-	const { state } = location;
-	const token = state?.token;
-	const [accessedToken, setAccessedToken] = useState();
-	
-	if (token) {
-		localStorage.setItem("accessToken", token);
-		useEffect[
-			() => (setAccessedToken(localStorage.getItem("accessToken")), [])
-		];
-	}
-	console.log(token, accessedToken);
 
+	const [token, setToken] = useState();
+	const [name, setName] = useState();
+	const savedToken = localStorage.getItem("accessToken");
+	const savedname = localStorage.getItem("name");
+	// setToken(savedToken)
+	useEffect(() => {
+		setToken(savedToken);
+		setName(savedname);
+	}, [savedToken, savedname]);
+
+	console.log(savedToken, name);
 	const theme = useTheme();
 	const [open, setOpen] = useState(false);
 
@@ -109,8 +108,8 @@ export default function PersistentDrawerRight() {
 						component="div"
 					>
 						<UserIcon
-							userName={state?.name}
-							token={state?.token}
+							userName={name}
+							token={token}
 						/>
 					</Box>
 					<IconButton

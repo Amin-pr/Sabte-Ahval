@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { Register } from "../utility/Auth/ApiRegister";
+import { Register } from "../api/ApiRegister";
 export default function useRegister() {
 	const {
 		mutate: register,

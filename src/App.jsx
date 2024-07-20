@@ -156,6 +156,14 @@ function App() {
 		},
 	];
 
+
+
+
+
+
+	
+	const downloadCols = columns?.map((column) => column).reverse();
+	console.log(downloadCols);
 	const rows = [
 		{
 			id: 1,
@@ -339,8 +347,9 @@ function App() {
 					path: "table",
 					element: (
 						<DataTable
-							columns={columns}
+							columns={downloadCols}
 							rows={rows}
+							
 						/>
 					),
 				},

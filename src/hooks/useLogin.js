@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Login } from "../utility/Auth/ApiAuth";
+import { Login } from "../api/ApiAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -16,12 +16,9 @@ export function UseLogin() {
 
 				console.log(data.data.access_token);
 				queryClient.setQueryData(["userInfo"], data);
-				navigate(`/`, {
-					state: {
-						token: data.data.access_token,
-						name: data.data.name,
-					},
-				});
+				localStorage.setItem("accessToken", data.data.access_token);
+				localStorage.setItem("name", data.data.name);
+				navigate(`/`);
 				toast.success(` ${data.data.name} خوش آمدی`);
 			} else if (data.code !== 201) {
 				toast.error(data.message);

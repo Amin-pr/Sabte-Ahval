@@ -66,6 +66,7 @@ export default function DataTable({ columns,rows }) {
 			<DataGrid
 				rows={rows}
 				columns={columns}
+				
 				initialState={{
 					pagination: {
 						paginationModel: {
@@ -76,6 +77,8 @@ export default function DataTable({ columns,rows }) {
 				pageSizeOptions={[5]}
 				checkboxSelection
 				disableRowSelectionOnClick
+				// autosizeOnMount
+				
 			/>
 			<Box>
 				<CsvDownloader
