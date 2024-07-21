@@ -54,14 +54,11 @@ function User() {
 
 	const { GetUser, data } = UseGetUser();
 
-	useEffect(() => {
-		GetUser();
-	}, [GetUser]);
 	console.log(data?.data?.users?.data, token);
 	return (
 		<div className={styles.holder}>
 			<Button
-				onClick={() => GetUser()}
+				onClick={() => GetUsers()}
 				color="primary"
 			>
 				asda
@@ -69,6 +66,7 @@ function User() {
 			<DataTable
 				rows={rows}
 				columns={headCells}
+
 			/>
 			<CreateUserForm />
 		</div>
