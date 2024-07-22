@@ -8,30 +8,36 @@ import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function DataTable({ columns, rows }) {
-	const downloadCols = columns?.map((column) => column.headerName).reverse();
-	const [selectedRows, setSelectedRows] = useState();
+	const downloadCols = columns?.map((column) => column.headerName);
 
+	const [selectedRows, setSelectedRows] = useState();
 	const selectedRowsData = selectedRows?.map((rowId) =>
 		rows.find((row) => row.id === rowId)
 	);
-	console.log(selectedRowsData);
+
+	console.log(selectedRowsData, columns);
 	return (
 		<Box className={styles.holder}>
 			<DataGrid
 				rows={rows}
 				columns={columns}
 				localeText={faIR.components.MuiDataGrid.defaultProps.localeText}
-				pageSizeOptions={[5]}
+				pageSizeOptions={[5, 10, 25,100]}
 				checkboxSelection
 				rowSelectionModel={selectedRows}
 				onRowSelectionModelChange={(newselection) =>
 					setSelectedRows(newselection)
 				}
+				head
 				sx={{
 					boxShadow: 2,
-					border: 2,
-					borderColor: "primary.light",
-					"& .MuiDataGrid-cell": { textAlign: "right" },
+					// border: 1,
+					// borderColor: "grey",
+					"& .MuiDataGrid-cell": {
+						textAlign: "center",
+						borderLeft: "1px solid grey",
+					},
+					// "& .MuiDataGrid-cell": { textAlign: "center" },
 				}}
 			/>
 			<Box>

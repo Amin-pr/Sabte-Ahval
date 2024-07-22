@@ -1,7 +1,6 @@
 import Dashboard from "./pages/Dashboard/DashboardLayout";
 import "./app.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import TableComp from "./ui/components/table/TableComp";
 import User from "./pages/user/User";
 import SignInSide from "./pages/login/LoginPage";
 import { ThemeProvider } from "@emotion/react";
@@ -10,8 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems";
-import FFtech from "../src/FFtech";
+import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems" ;
 import DataTable from "./ui/components/table/DataGrid";
 
 function App() {
@@ -115,42 +113,42 @@ function App() {
 		{
 			field: "score",
 			headerName: "امتیاز",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "officeCode",
 			headerName: "کد دفتر",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "session",
 			headerName: "دوره",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "city",
 			headerName: "شهر",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "province",
 			headerName: "استان",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "Num",
 			headerName: "ردیف",
-			type: "number",
+			// type: "number",
 			width: 110,
 			editable: true,
 		},
@@ -167,7 +165,6 @@ function App() {
 	const rows = [
 		{
 			id: 1,
-
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -179,7 +176,6 @@ function App() {
 		},
 		{
 			id: 2,
-
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -191,7 +187,6 @@ function App() {
 		},
 		{
 			id: 3,
-
 			province: "تهران",
 			city: "تهران",
 			session: 305,
@@ -203,7 +198,6 @@ function App() {
 		},
 		{
 			id: 4,
-
 			province: "تهران",
 			city: "تهران",
 			session: 305,
