@@ -10,6 +10,8 @@ import Loading from "../../ui/components/loading/Loading";
 import { DeleteOutline } from "@mui/icons-material";
 import UseDeleteUser from "../../hooks/UseDeleteUser";
 import { useQueryClient } from "@tanstack/react-query";
+import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
+
 import { toast } from "react-toastify";
 function User() {
 	const {
@@ -74,17 +76,17 @@ function User() {
 			// editable: true,
 		},
 		{
-			field: "delete",
-			headerName: "",
-			width: 100,
+			field: "edits",
+			headerName: "تغییرات",
+			width: "auto",
 			renderCell: (params) => (
-				<Button
-					onClick={() => handleDeleteUser(params.row.id)}
-					color="error"
+				<RowButtonGroup
 					variant="contained"
+					color="primary"
+					// onClick={() => handleRowClick(params.row)}
 				>
-					<DeleteOutline />
-				</Button>
+					Click me
+				</RowButtonGroup>
 			),
 		},
 	];
@@ -95,12 +97,7 @@ function User() {
 				<Loading text={"لطفا صبر نمایید..."} />
 			)}
 			<CreateUserForm />
-			{/* <Button
-				onClick={() => Delete(9)}
-				color="primary"
-			>
-				asda
-			</Button> */}
+
 			<DataTable
 				rows={users}
 				columns={headCells}

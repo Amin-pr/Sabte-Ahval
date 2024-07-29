@@ -73,6 +73,7 @@ const CreateUserForm = () => {
 						onChange={(e) => setName(e.target.value)}
 						error={data?.errors?.name}
 						helperText={data?.errors?.name}
+						focused
 					/>
 				</FormControl>
 				<TextField
@@ -85,6 +86,7 @@ const CreateUserForm = () => {
 					onChange={(e) => setUsername(e.target.value)}
 					helperText={data?.errors?.username}
 					error={data?.errors?.username}
+					
 				/>
 				<TextField
 					type="tel"

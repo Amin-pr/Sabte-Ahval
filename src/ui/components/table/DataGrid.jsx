@@ -40,6 +40,7 @@ export default function DataTable({ columns, rows, exportAbility }) {
 					Checkbox: CustomCheckbox,
 				}}
 				head
+				
 				sx={{
 					p: "1rem",
 					boxShadow: 2,
@@ -49,10 +50,6 @@ export default function DataTable({ columns, rows, exportAbility }) {
 						textAlign: "center",
 						borderLeft: "1px solid rgb(0, 103, 16)",
 					},
-					"&.Mui-checked": {
-						color: "green !important",
-					},
-					// "& .MuiDataGrid-cell": { textAlign: "center" },
 				}}
 			/>
 			{exportAbility === true && (
