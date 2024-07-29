@@ -57,20 +57,24 @@ const CreateUserForm = () => {
 					justifyContent: "space-around",
 					margin: "2rem",
 					alignItems: "start",
+					direction: "rtl",
+					rowGap: "1rem",
 				}}
 				onSubmit={handleSubmit}
 			>
-				<TextField
-					type="text"
-					label="نام"
-					size="small"
-					dir="rtl"
-					autoComplete="Name"
-					value={name}
-					onChange={(e) => setName(e.target.value)}
-					error={data?.errors?.name}
-					helperText={data?.errors?.name}
-				/>
+				<FormControl>
+					<TextField
+						type="text"
+						label="نام"
+						size="small"
+						dir="rtl"
+						autoComplete="Name"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+						error={data?.errors?.name}
+						helperText={data?.errors?.name}
+					/>
+				</FormControl>
 				<TextField
 					type="text"
 					label="نام کاربری"
@@ -79,6 +83,8 @@ const CreateUserForm = () => {
 					autoComplete="username"
 					value={username}
 					onChange={(e) => setUsername(e.target.value)}
+					helperText={data?.errors?.username}
+					error={data?.errors?.username}
 				/>
 				<TextField
 					type="tel"
@@ -88,6 +94,8 @@ const CreateUserForm = () => {
 					autoComplete="phone"
 					value={phoneNumber}
 					onChange={(e) => setPhoneNumber(e.target.value)}
+					helperText={data?.errors?.phone_number}
+					error={data?.errors?.phone_number}
 				/>
 				<TextField
 					type="text"
@@ -97,11 +105,14 @@ const CreateUserForm = () => {
 					autoComplete="password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
+					helperText={data?.errors?.password}
+					error={data?.errors?.password}
 				/>
 				<FormControl
-					sx={{ m: 1, minWidth: 120 }}
+					sx={{ minWidth: 120 }}
 					size="small"
 					about=""
+					error={data?.errors?.role_id}
 				>
 					<InputLabel id="demo-select-small-label">دسترسی</InputLabel>
 					<Select
@@ -117,8 +128,7 @@ const CreateUserForm = () => {
 						<MenuItem value={2004}>سطح سه</MenuItem>
 					</Select>
 				</FormControl>
-
-				<Box margin={5}>
+				<Box>
 					<Button
 						type="submit"
 						variant="contained"

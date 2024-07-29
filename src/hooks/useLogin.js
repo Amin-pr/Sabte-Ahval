@@ -18,6 +18,7 @@ export function UseLogin() {
 				queryClient.setQueryData(["userInfo"], data);
 				localStorage.setItem("accessToken", data.data.access_token);
 				localStorage.setItem("name", data.data.name);
+				
 				navigate(`/`);
 				toast.success(` ${data.data.name} خوش آمدی`);
 			} else if (data.code !== 201) {

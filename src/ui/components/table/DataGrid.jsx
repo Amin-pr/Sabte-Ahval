@@ -9,7 +9,7 @@ import { Radio } from "@mui/material";
 import { LinkedIn } from "@mui/icons-material";
 
 // eslint-disable-next-line react/prop-types
-export default function DataTable({ columns, rows }) {
+export default function DataTable({ columns, rows, exportAbility }) {
 	const downloadCols = columns?.map((column) => column.headerName);
 
 	const [selectedRows, setSelectedRows] = useState();
@@ -55,12 +55,14 @@ export default function DataTable({ columns, rows }) {
 					// "& .MuiDataGrid-cell": { textAlign: "center" },
 				}}
 			/>
-			<Box>
-				<CsvDownloader
-					header={downloadCols}
-					row={selectedRowsData}
-				/>
-			</Box>
+			{exportAbility === true && (
+				<Box>
+					<CsvDownloader
+						header={downloadCols}
+						row={selectedRowsData}
+					/>
+				</Box>
+			)}
 		</Box>
 	);
 }
