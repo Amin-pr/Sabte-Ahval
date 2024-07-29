@@ -14,6 +14,14 @@ import { UseLogin } from "../../hooks/UseLogin";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../ui/components/loading/Loading";
 import { useState } from "react";
+import {
+	FormControl,
+	IconButton,
+	InputAdornment,
+	InputLabel,
+	OutlinedInput,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 // async function getUser() {
 // 	const {
@@ -22,23 +30,33 @@ import { useState } from "react";
 // 	return user;
 // }
 
+//invalidating any existing user
+// useEffect[
+// 	(() => {
+// 		queryClient.removeQueries(["useInfo"]);
+// 	},
+// 	[])
+// ];
+
 export default function SignInSide() {
+	const [showPassword, setShowPassword] = useState(false);
+
 	const { data, isError, error } = useQuery({
 		queryKey: ["userInfo"],
 	});
 
-	//invalidating any existing user
-	// useEffect[
-	// 	(() => {
-	// 		queryClient.removeQueries(["useInfo"]);
-	// 	},
-	// 	[])
-	// ];
+	const handleClickShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
+
+	const handleMouseDownPassword = (event) => {
+		event.preventDefault();
+	};
 
 	console.log(error, isError, data);
 
-	const [userName, setUserName] = useState();
-	const [password, setPassword] = useState();
+	const [userName, setUserName] = useState("");
+	const [password, setPassword] = useState("");
 
 	const { login, isLoading } = UseLogin();
 
@@ -48,7 +66,7 @@ export default function SignInSide() {
 		login({ email: userName, password: password });
 	};
 	// const isLoading = true;
-	console.log(isLoading);
+	console.log(password, userName);
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -118,22 +136,42 @@ export default function SignInSide() {
 								dir="rtl"
 								variant="outlined"
 								InputLabelProps={{ style: { fontWeight: "700" } }}
+								value={userName}
 								InputProps={{ style: { fontWeight: "700" } }}
 								onChange={(e) => setUserName(e.target.value)}
 							/>
-							<TextField
+							<FormControl
 								dir="rtl"
-								margin="normal"
-								required
 								fullWidth
-								name="password"
-								label="رمز عبور"
-								type="password"
-								id="password"
-								autoComplete="current-password"
-								InputLabelProps={{ style: { fontWeight: "700" } }}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
+								variant="outlined"
+							>
+								<InputLabel
+									required
+									htmlFor="outlined-adornment-password"
+								>
+									رمز عبور
+								</InputLabel>
+								<OutlinedInput
+									id="outlined-adornment-password"
+									sx={{ p: "1", bgcolor: "rgb(232,240,254)" }}
+									onChange={(e) => setPassword(e.target.value)}
+									value={password}
+									type={showPassword ? "text" : "password"}
+									endAdornment={
+										<InputAdornment position="end">
+											<IconButton
+												aria-label="toggle password visibility"
+												onClick={handleClickShowPassword}
+												onMouseDown={handleMouseDownPassword}
+												edge="end"
+											>
+												{showPassword ? <VisibilityOff /> : <Visibility />}
+											</IconButton>
+										</InputAdornment>
+									}
+									label="Password"
+								/>
+							</FormControl>
 							{/* <FormControlLabel
 								control={
 									<Checkbox
@@ -162,32 +200,43 @@ export default function SignInSide() {
 								<Grid
 									item
 									xs
-									sx={{ my: 8 }}
+									sx={{ my: 2 }}
+									gap={5}
+									alignItems={"center"}
+									justifyContent={"center"}
 								>
-									<Link
-										href="#"
-										variant="a"
-										fontSize={"20px"}
-										sx={{ textDecoration: "none", color: "error" }}
-									>
-										فراموشی رمز عبور
-									</Link>
-								</Grid>
-								<Grid item>
-									<Typography
-										variant="p"
-										color="text.secondary"
-										// align="right"
-										fontWeight={"800"}
-										sx={{
-											margin: "4rem auto",
-											// textAlign: "right",
-											// direction: "rtl",
-										}}
-									>
-										کلیه حقوق این سایت متعلق به شرکت فن آوران اطلاعات ایرانیاین
-										میباشد
-									</Typography>
+									<Box>
+										<Link
+											href="#"
+											variant="a"
+											fontSize={"20px"}
+											sx={{
+												textDecoration: "none",
+												color: "error",
+												// width: "15%",
+												// margin: "2rem",
+												// bgcolor: "red",
+											}}
+										>
+											فراموشی رمز عبور
+										</Link>
+									</Box>
+									<Box my={1}>
+										<Typography
+											variant="p"
+											color="text.secondary"
+											// align="right"
+											fontWeight={"800"}
+											sx={{
+												// margin: "4rem auto",
+												textAlign: "right",
+												direction: "rtl",
+											}}
+										>
+											کلیه حقوق این سایت متعلق به شرکت فن آوران اطلاعات
+											ایرانیاین میباشد
+										</Typography>
+									</Box>
 								</Grid>
 							</Grid>
 						</Box>

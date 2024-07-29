@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { Register } from "../api/ApiRegister";
-export default function useRegister() {
+import { Delete } from "../api/ApiDelete";
+export default function UseDeleteUser() {
 	const {
-		mutate: register,
+		mutate: DeleteUser,
 		isPending,
 		data,
 	} = useMutation({
-		mutationFn: Register,
+		mutationFn: Delete,
 		onSuccess: (data) => {
 			console.log(data);
 			if (data.code === 201) {
@@ -22,5 +22,5 @@ export default function useRegister() {
 			return err;
 		},
 	});
-	return {  register, isLoading: isPending, data };
+	return { DeleteUser, isLoading: isPending, data };
 }

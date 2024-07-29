@@ -13,29 +13,39 @@ import {
 } from "@mui/material";
 import theme from "../../theme/theme";
 import Loading from "../loading/Loading";
+import { useQueryClient } from "@tanstack/react-query";
 
 const CreateUserForm = () => {
 	const [name, setName] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState();
+	const [phoneNumber, setPhoneNumber] = useState(null);
 	const [refId, setRefId] = useState("");
 
-	const { register, isLoading, error } = useRegister();
-	console.log(error);
+	const { register, isLoading, data } = useRegister();
+	const queryClient = useQueryClient();
+
 	const handleSubmit = (event) => {
 		const data = {
 			username: username,
 			password: password,
 			phone_number: phoneNumber,
-			ref_id: refId,
+			role_id: refId,
 			name: name,
 		};
 		event.preventDefault();
 		register(data);
 	};
 
-	if (isLoading) return <Loading text={"لطفا صبرکنید"} />;
+	console.log(data);
+	useEffect(() => {
+		if (data?.success === true) {
+			queryClient.resetQueries(["users"]);
+		}
+	}, [data?.success, queryClient]);
+
+	if (isLoading) return <Loading text={"...لطفا صبر کنید"} />;
+
 	return (
 		<ThemeProvider theme={theme}>
 			<FormControl
@@ -45,8 +55,8 @@ const CreateUserForm = () => {
 					flexDirection: "row",
 					flexWrap: "wrap",
 					justifyContent: "space-around",
-					// margin: "2rem",
-					alignItems: "center",
+					margin: "2rem",
+					alignItems: "start",
 				}}
 				onSubmit={handleSubmit}
 			>
@@ -58,7 +68,8 @@ const CreateUserForm = () => {
 					autoComplete="Name"
 					value={name}
 					onChange={(e) => setName(e.target.value)}
-					// error={error}
+					error={data?.errors?.name}
+					helperText={data?.errors?.name}
 				/>
 				<TextField
 					type="text"
@@ -90,6 +101,7 @@ const CreateUserForm = () => {
 				<FormControl
 					sx={{ m: 1, minWidth: 120 }}
 					size="small"
+					about=""
 				>
 					<InputLabel id="demo-select-small-label">دسترسی</InputLabel>
 					<Select

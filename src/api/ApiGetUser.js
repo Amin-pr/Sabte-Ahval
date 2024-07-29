@@ -1,5 +1,6 @@
 export async function GetUsers() {
 	const token = localStorage.getItem("accessToken");
+	console.log(token);
 
 	const response = await fetch(
 		"http://ncrdashboard.icsdev.ir/api/v1/admin/get-users",
@@ -14,6 +15,5 @@ export async function GetUsers() {
 
 	const result = await response.json();
 
-	console.log(result, token);
 	return result;
 }

@@ -6,25 +6,49 @@ import DataTable from "../../ui/components/table/DataGrid";
 import CreateUserForm from "../../ui/components/createUserForm/CreatUserForm";
 import UseGetUser from "../../hooks/UseGetUser";
 import { Button } from "@mui/material";
-import { GetUsers } from "../../api/ApiGetUser";
+import Loading from "../../ui/components/loading/Loading";
+import { DeleteOutline } from "@mui/icons-material";
+import UseDeleteUser from "../../hooks/UseDeleteUser";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 function User() {
-	const token = localStorage.getItem("accessToken");
+	const {
+		DeleteUser,
+		data: DeleteData,
+		isLoading: DeleteIsLoading,
+	} = UseDeleteUser();
 
-	const rows = [
-		{
-			id: 1,
-			num: 1,
-			province: "تهران",
-			city: "تهران",
-			session: 305,
-			officeCode: 3.7,
-			score: 67,
-			rank: 4.3,
-			status: "فعال",
-			location: "شسی",
-		},
-	];
+	const {
+		error: getUserError,
+		data: getUserData,
+		isPending: getUserIsLoading,
+	} = UseGetUser();
+
+	const QueryClient = useQueryClient();
+
+	//error
+	useEffect(() => {
+		toast.error(getUserError && `خطایی رخ داده`);
+	}, [getUserError]);
+
+	useEffect(() => {
+		if (DeleteData?.success === true) {
+			QueryClient.resetQueries(["users"]);
+		}
+	}, [DeleteData?.success, QueryClient]);
+
+	//دیتای یوزرها
+	const users = getUserData?.data?.users?.data;
+
+	console.log(DeleteData);
+
+	function handleDeleteUser(id) {
+		DeleteUser(id);
+	}
+
+	// سربرگ ستون ها
 	const headCells = [
+		{ field: "id", headerName: "شناسه", width: 120 },
 		{
 			field: "name",
 			headerName: "نام",
@@ -43,32 +67,44 @@ function User() {
 			width: 200,
 			// editable: true,
 		},
-		// {
-		// 	field: "ref_if",
-		// 	headerName: "سطح دسترسی",
-		// 	width: 200,
-		// 	// editable: true,
-		// },
+		{
+			field: "role",
+			headerName: "سطح دسترسی",
+			width: 200,
+			// editable: true,
+		},
+		{
+			field: "delete",
+			headerName: "",
+			width: 100,
+			renderCell: (params) => (
+				<Button
+					onClick={() => handleDeleteUser(params.row.id)}
+					color="error"
+					variant="contained"
+				>
+					<DeleteOutline />
+				</Button>
+			),
+		},
 	];
-	const [users, setUsers] = useState();
 
-	const { GetUser, data } = UseGetUser();
-
-	console.log(data?.data?.users?.data, token);
 	return (
 		<div className={styles.holder}>
-			<Button
-				onClick={() => GetUsers()}
+			{(getUserIsLoading || DeleteIsLoading) && (
+				<Loading text={"لطفا صبر نمایید..."} />
+			)}
+			<CreateUserForm />
+			{/* <Button
+				onClick={() => Delete(9)}
 				color="primary"
 			>
 				asda
-			</Button>
+			</Button> */}
 			<DataTable
-				rows={rows}
+				rows={users}
 				columns={headCells}
-
 			/>
-			<CreateUserForm />
 		</div>
 	);
 }
