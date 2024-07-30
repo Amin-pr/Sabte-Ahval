@@ -1,107 +1,20 @@
-import Dashboard from "./pages/Dashboard/DashboardLayout";
+import { lazy } from "react";
 import "./app.scss";
-import {
-	createBrowserRouter,
-	HashRouter,
-	Route,
-	RouterProvider,
-	Routes,
-} from "react-router-dom";
-import User from "./pages/user/User";
-import SignInSide from "./pages/login/LoginPage";
-import { ThemeProvider } from "@emotion/react";
-import theme from "./ui/theme/theme";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "react-toastify/dist/ReactToastify.css";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems";
-import DataTable from "./ui/components/table/DataGrid";
-
+import { ThemeProvider } from "styled-components";
+import theme from "./ui/theme/theme";
+const SignInSide = lazy(() => import("./pages/login/LoginPage"));
+const Dashboard = lazy(() => import("./pages/Dashboard/DashboardLayout"));
+const DataTable = lazy(() => import("./ui/components/table/DataGrid"));
+const User = lazy(() => import("./pages/user/User"));
+const Dashboarditems = lazy(() =>
+	import("./pages/Dashboard/Dashboard items/DashboardItems")
+);
+import "react-toastify/dist/ReactToastify.css";
 function App() {
-	function createData(
-		id,
-		num,
-		province,
-		city,
-		rank,
-		score,
-		officeCode,
-		session,
-		location,
-		status
-	) {
-		return {
-			id,
-			num,
-			province,
-			city,
-			rank,
-			score,
-			officeCode,
-			session,
-			location,
-			status,
-		};
-	}
-
-	// const headCells = [
-	// 	{
-	// 		id: "status",
-	// 		numeric: false,
-	// 		disablePadding: false,
-	// 		label: "وضعیت",
-	// 	},
-	// 	{
-	// 		id: "location",
-	// 		numeric: false,
-	// 		disablePadding: false,
-	// 		label: "مکان",
-	// 	},
-	// 	{
-	// 		id: "rank",
-	// 		numeric: true,
-	// 		disablePadding: false,
-	// 		label: "رتبه",
-	// 	},
-	// 	{
-	// 		id: "score",
-	// 		numeric: true,
-	// 		disablePadding: false,
-	// 		label: "امتیاز",
-	// 	},
-	// 	{
-	// 		id: "officeCode",
-	// 		numeric: true,
-	// 		disablePadding: false,
-	// 		label: "کد دفتر",
-	// 	},
-	// 	{
-	// 		id: "session",
-	// 		numeric: true,
-	// 		disablePadding: false,
-	// 		label: "دوره",
-	// 	},
-	// 	{
-	// 		id: "city",
-	// 		numeric: false,
-	// 		disablePadding: false,
-	// 		label: "شهر",
-	// 	},
-	// 	{
-	// 		id: "province",
-	// 		numeric: false,
-	// 		disablePadding: true,
-	// 		label: "استان",
-	// 	},
-	// 	{
-	// 		id: "Num",
-	// 		numeric: true,
-	// 		disablePadding: true,
-	// 		label: "ردیف",
-	// 	},
-	// ];
-
 	const columns = [
 		{ field: "status", headerName: "وضعیت", width: 150 },
 		{
@@ -208,154 +121,6 @@ function App() {
 			location: "شسی",
 		},
 	];
-	// 	{
-	// 		id: 5,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 6,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 7,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 8,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 9,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 10,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 11,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 12,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 13,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	// 	{
-	// 		id: 14,
-	// 		num: 1,
-	// 		province: "تهران",
-	// 		city: "تهران",
-	// 		session: 305,
-	// 		officeCode: 3.7,
-	// 		score: 67,
-	// 		rank: 4.3,
-	// 		status: "فعال",
-	// 		location: "شسی",
-	// 	},
-	//
-	// ];
-
-	// const router = createBrowserRouter([
-	// 	{ path: "/Login", element: <SignInSide /> },
-	// 	{
-	// 		path: "/",
-	// 		element: <Dashboard />,
-	// 		children: [
-	// 			{
-	// 				path: "table",
-	// 				element: (
-	// 					<DataTable
-	// 						columns={downloadCols}
-	// 						rows={rows}
-	// 					/>
-	// 				),
-	// 			},
-	// 			{
-	// 				path: "user managment",
-	// 				element: <User />,
-	// 			},
-	// 			{ path: "#login", element: <SignInSide /> },
-	// 			{ path: "dashboard", element: <Dashboarditems /> },
-	// 			// { path: "dashboard", element: <FFtech /> }
-	// 		],
-	// 	},
-	// ]);
 
 	console.log(theme);
 	const queryClient = new QueryClient();
@@ -369,25 +134,26 @@ function App() {
 					<HashRouter>
 						<Routes>
 							<Route
-								path="/login"
+								path="login"
 								element={<SignInSide />}
 							/>
 							<Route
 								path="/"
 								element={<Dashboard />}
-							/>
-							<Route
-								path="/table"
-								element={<DataTable />}
-							/>
-							<Route
-								path="/user management"
-								element={<User />}
-							/>
-							<Route
-								path="/dashboard"
-								element={<Dashboarditems />}
-							/>
+							>
+								<Route
+									path="/table"
+									element={<DataTable />}
+								/>
+								<Route
+									path="/userManagment"
+									element={<User />}
+								/>
+								<Route
+									path="/dashboard"
+									element={<Dashboarditems />}
+								/>
+							</Route>
 						</Routes>
 					</HashRouter>
 				</ThemeProvider>

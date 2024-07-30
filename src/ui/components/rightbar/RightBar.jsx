@@ -235,7 +235,7 @@ export default function PersistentDrawerRight() {
 				</Divider>
 				<List>
 					<Link
-						to="/user managment"
+						to="/userManagment"
 						relative="path"
 					>
 						<ListItem disablePadding>

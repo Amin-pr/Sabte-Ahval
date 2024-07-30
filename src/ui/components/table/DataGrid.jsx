@@ -16,17 +16,10 @@ export default function DataTable({ columns, rows, exportAbility }) {
 	const selectedRowsData = selectedRows?.map((rowId) =>
 		rows?.find((row) => row.id === rowId)
 	);
-	const CustomCheckbox = () => (
-		<Radio
-			icon={<LinkedIn />}
-			checkedIcon={<LinkedIn style={{ color: "green" }} />}
-		/>
-	);
+
 	return (
 		<Box className={styles.holder}>
 			<DataGrid
-				scrollbarSize={1}
-				col
 				rows={rows}
 				columns={columns}
 				localeText={faIR.components.MuiDataGrid.defaultProps.localeText}
@@ -36,12 +29,9 @@ export default function DataTable({ columns, rows, exportAbility }) {
 				onRowSelectionModelChange={(newselection) =>
 					setSelectedRows(newselection)
 				}
-				components={{
-					Checkbox: CustomCheckbox,
-				}}
 				head
-				
 				sx={{
+					overflow: "auto",
 					p: "1rem",
 					boxShadow: 2,
 					border: 1,

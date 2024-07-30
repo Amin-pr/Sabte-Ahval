@@ -79,7 +79,7 @@ function User() {
 		{
 			field: "edits",
 			headerName: "تغییرات",
-			width: "auto",
+			width: 300,
 
 			renderCell: (params) => (
 				<RowButtonGroup

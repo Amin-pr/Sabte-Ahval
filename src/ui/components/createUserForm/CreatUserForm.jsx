@@ -19,7 +19,7 @@ const CreateUserForm = () => {
 	const [name, setName] = useState("");
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [phoneNumber, setPhoneNumber] = useState(null);
+	const [phoneNumber, setPhoneNumber] = useState("");
 	const [refId, setRefId] = useState("");
 
 	const { register, isLoading, data } = useRegister();
@@ -86,7 +86,6 @@ const CreateUserForm = () => {
 					onChange={(e) => setUsername(e.target.value)}
 					helperText={data?.errors?.username}
 					error={data?.errors?.username}
-					
 				/>
 				<TextField
 					type="tel"
