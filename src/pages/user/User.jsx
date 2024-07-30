@@ -14,6 +14,8 @@ import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
 
 import { toast } from "react-toastify";
 function User() {
+	const QueryClient = useQueryClient();
+
 	const {
 		DeleteUser,
 		data: DeleteData,
@@ -25,8 +27,6 @@ function User() {
 		data: getUserData,
 		isPending: getUserIsLoading,
 	} = UseGetUser();
-
-	const QueryClient = useQueryClient();
 
 	//error
 	useEffect(() => {
@@ -41,13 +41,14 @@ function User() {
 
 	//دیتای یوزرها
 	const users = getUserData?.data?.users?.data;
-
-	console.log(DeleteData);
-
+	console.log(users);
 	function handleDeleteUser(id) {
 		DeleteUser(id);
 	}
 
+	function handleEditUser(id) {
+		console.log(id);
+	}
 	// سربرگ ستون ها
 	const headCells = [
 		{ field: "id", headerName: "شناسه", width: 120 },
@@ -79,14 +80,15 @@ function User() {
 			field: "edits",
 			headerName: "تغییرات",
 			width: "auto",
+
 			renderCell: (params) => (
 				<RowButtonGroup
 					variant="contained"
 					color="primary"
-					// onClick={() => handleRowClick(params.row)}
-				>
-					Click me
-				</RowButtonGroup>
+					params={params}
+					deleteUser={handleDeleteUser}
+					editUser={handleEditUser}
+				></RowButtonGroup>
 			),
 		},
 	];

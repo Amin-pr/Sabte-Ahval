@@ -1,6 +1,12 @@
 import Dashboard from "./pages/Dashboard/DashboardLayout";
 import "./app.scss";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+	createBrowserRouter,
+	HashRouter,
+	Route,
+	RouterProvider,
+	Routes,
+} from "react-router-dom";
 import User from "./pages/user/User";
 import SignInSide from "./pages/login/LoginPage";
 import { ThemeProvider } from "@emotion/react";
@@ -9,7 +15,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems" ;
+import Dashboarditems from "./pages/Dashboard/Dashboard items/DashboardItems";
 import DataTable from "./ui/components/table/DataGrid";
 
 function App() {
@@ -154,12 +160,6 @@ function App() {
 		},
 	];
 
-
-
-
-
-
-	
 	const downloadCols = columns?.map((column) => column).reverse();
 	console.log(downloadCols);
 	const rows = [
@@ -331,32 +331,31 @@ function App() {
 	//
 	// ];
 
-	const router = createBrowserRouter([
-		{ path: "/Login", element: <SignInSide /> },
-		{
-			path: "/",
-			element: <Dashboard />,
-			children: [
-				{
-					path: "table",
-					element: (
-						<DataTable
-							columns={downloadCols}
-							rows={rows}
-							
-						/>
-					),
-				},
-				{
-					path: "user managment",
-					element: <User />,
-				},
-				{ path: "login", element: <SignInSide /> },
-				{ path: "dashboard", element: <Dashboarditems /> },
-				// { path: "dashboard", element: <FFtech /> }
-			],
-		},
-	]);
+	// const router = createBrowserRouter([
+	// 	{ path: "/Login", element: <SignInSide /> },
+	// 	{
+	// 		path: "/",
+	// 		element: <Dashboard />,
+	// 		children: [
+	// 			{
+	// 				path: "table",
+	// 				element: (
+	// 					<DataTable
+	// 						columns={downloadCols}
+	// 						rows={rows}
+	// 					/>
+	// 				),
+	// 			},
+	// 			{
+	// 				path: "user managment",
+	// 				element: <User />,
+	// 			},
+	// 			{ path: "#login", element: <SignInSide /> },
+	// 			{ path: "dashboard", element: <Dashboarditems /> },
+	// 			// { path: "dashboard", element: <FFtech /> }
+	// 		],
+	// 	},
+	// ]);
 
 	console.log(theme);
 	const queryClient = new QueryClient();
@@ -366,11 +365,32 @@ function App() {
 			<ToastContainer />
 			<QueryClientProvider client={queryClient}>
 				<ReactQueryDevtools initialIsOpen={false} />
-				<RouterProvider router={router}>
-					<ThemeProvider theme={theme}>
-						<Dashboard />
-					</ThemeProvider>
-				</RouterProvider>
+				<ThemeProvider theme={theme}>
+					<HashRouter>
+						<Routes>
+							<Route
+								path="/login"
+								element={<SignInSide />}
+							/>
+							<Route
+								path="/"
+								element={<Dashboard />}
+							/>
+							<Route
+								path="/table"
+								element={<DataTable />}
+							/>
+							<Route
+								path="/user management"
+								element={<User />}
+							/>
+							<Route
+								path="/dashboard"
+								element={<Dashboarditems />}
+							/>
+						</Routes>
+					</HashRouter>
+				</ThemeProvider>
 			</QueryClientProvider>
 		</div>
 	);
