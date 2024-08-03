@@ -4,6 +4,7 @@ import useRegister from "../../../hooks/UseCreateUser";
 import {
 	Box,
 	Button,
+	CssBaseline,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -48,7 +49,8 @@ const CreateUserForm = () => {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<FormControl
+			<CssBaseline />
+			<Box
 				// className={styles.holder}
 				sx={{
 					display: "flex",
@@ -76,39 +78,46 @@ const CreateUserForm = () => {
 						focused
 					/>
 				</FormControl>
-				<TextField
-					type="text"
-					label="نام کاربری"
-					size="small"
-					dir="rtl"
-					autoComplete="username"
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					helperText={data?.errors?.username}
-					error={data?.errors?.username}
-				/>
-				<TextField
-					type="tel"
-					label="تلفن"
-					size="small"
-					dir="rtl"
-					autoComplete="phone"
-					value={phoneNumber}
-					onChange={(e) => setPhoneNumber(e.target.value)}
-					helperText={data?.errors?.phone_number}
-					error={data?.errors?.phone_number}
-				/>
-				<TextField
-					type="text"
-					label="رمز عبور"
-					size="small"
-					dir="rtl"
-					autoComplete="password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					helperText={data?.errors?.password}
-					error={data?.errors?.password}
-				/>
+				<FormControl>
+					<TextField
+						type="text"
+						label="نام کاربری"
+						size="small"
+						dir="rtl"
+						autoComplete="username"
+						value={username}
+						onChange={(e) => setUsername(e.target.value)}
+						helperText={data?.errors?.username}
+						error={data?.errors?.username}
+					/>
+				</FormControl>
+				<FormControl>
+					<TextField
+						type="tel"
+						label="تلفن"
+						size="small"
+						dir="rtl"
+						autoComplete="phone"
+						value={phoneNumber}
+						onChange={(e) => setPhoneNumber(e.target.value)}
+						helperText={data?.errors?.phone_number}
+						error={data?.errors?.phone_number}
+						sx={{ maxWidth: "250px" }}
+					/>
+				</FormControl>
+				<FormControl>
+					<TextField
+						type="text"
+						label="رمز عبور"
+						size="small"
+						dir="rtl"
+						autoComplete="password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						helperText={data?.errors?.password}
+						error={data?.errors?.password}
+					/>
+				</FormControl>
 				<FormControl
 					sx={{ minWidth: 120 }}
 					size="small"
@@ -138,7 +147,7 @@ const CreateUserForm = () => {
 						ساخت کاربر
 					</Button>
 				</Box>
-			</FormControl>
+			</Box>
 		</ThemeProvider>
 	);
 };

@@ -13,6 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
 
 import { toast } from "react-toastify";
+import UserEditModal from "../../ui/components/modal/UserEditModal";
 function User() {
 	const QueryClient = useQueryClient();
 
@@ -81,15 +82,7 @@ function User() {
 			headerName: "تغییرات",
 			width: 300,
 
-			renderCell: (params) => (
-				<RowButtonGroup
-					variant="contained"
-					color="primary"
-					params={params}
-					deleteUser={handleDeleteUser}
-					editUser={handleEditUser}
-				></RowButtonGroup>
-			),
+			renderCell: (userData) => <UserEditModal data={userData}></UserEditModal>,
 		},
 	];
 

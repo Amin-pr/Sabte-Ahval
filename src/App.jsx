@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import "./app.scss";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -14,6 +14,7 @@ const Dashboarditems = lazy(() =>
 	import("./pages/Dashboard/Dashboard items/DashboardItems")
 );
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "./ui/components/loading/Loading";
 function App() {
 	const columns = [
 		{ field: "status", headerName: "وضعیت", width: 150 },
@@ -135,23 +136,53 @@ function App() {
 						<Routes>
 							<Route
 								path="login"
-								element={<SignInSide />}
+								element={
+									<Suspense fallback={<Loading text={"لطفا صبر نمایید..."} />}>
+										<SignInSide />
+									</Suspense>
+								}
 							/>
 							<Route
 								path="/"
-								element={<Dashboard />}
+								element={
+									<Suspense fallback={<Loading text={"لطفا صبر نمایید..."} />}>
+										<Dashboard />
+									</Suspense>
+								}
 							>
 								<Route
 									path="/table"
-									element={<DataTable />}
+									element={
+										<Suspense
+											fallback={<Loading text={"لطفا صبر نمایید..."} />}
+										>
+											<DataTable
+												columns={columns}
+												rows={rows}
+												exportAbility
+											/>
+										</Suspense>
+									}
 								/>
 								<Route
 									path="/userManagment"
-									element={<User />}
+									element={
+										<Suspense
+											fallback={<Loading text={"لطفا صبر نمایید..."} />}
+										>
+											<User />
+										</Suspense>
+									}
 								/>
 								<Route
 									path="/dashboard"
-									element={<Dashboarditems />}
+									element={
+										<Suspense
+											fallback={<Loading text={"لطفا صبر نمایید..."} />}
+										>
+											<Dashboarditems />
+										</Suspense>
+									}
 								/>
 							</Route>
 						</Routes>

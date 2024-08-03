@@ -15,7 +15,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import { FeedOutlined, HomeRounded } from "@mui/icons-material";
+import { FeedOutlined, HomeRounded, LoginOutlined } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import styles from "./RightBar.module.scss";
@@ -243,6 +243,21 @@ export default function PersistentDrawerRight() {
 								<p>مدیریت کاربران</p>
 								<ListItemIcon>
 									<ChecklistRtlOutlinedIcon />
+								</ListItemIcon>
+							</ListItemButton>
+						</ListItem>
+					</Link>
+				</List>
+				<List>
+					<Link
+						to="/login"
+						relative="path"
+					>
+						<ListItem disablePadding>
+							<ListItemButton className={styles.listItem}>
+								<p>ورود</p>
+								<ListItemIcon>
+									<LoginOutlined />
 								</ListItemIcon>
 							</ListItemButton>
 						</ListItem>
