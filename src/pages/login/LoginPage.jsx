@@ -23,27 +23,12 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-// async function getUser() {
-// 	const {
-// 		data: { user },
-// 	} = await SupaBase.auth.getUser();
-// 	return user;
-// }
-
-//invalidating any existing user
-// useEffect[
-// 	(() => {
-// 		queryClient.removeQueries(["useInfo"]);
-// 	},
-// 	[])
-// ];
-
 export default function SignInSide() {
 	const [showPassword, setShowPassword] = useState(false);
 
-	const { data, isError, error } = useQuery({
-		queryKey: ["userInfo"],
-	});
+	// const { data, isError, error } = useQuery({
+	// 	queryKey: ["userInfo"],
+	// });
 
 	const handleClickShowPassword = () => {
 		setShowPassword(!showPassword);
@@ -53,19 +38,22 @@ export default function SignInSide() {
 		event.preventDefault();
 	};
 
-	console.log(error, isError, data);
 
 	const [userName, setUserName] = useState("");
 	const [password, setPassword] = useState("");
 
 	const { login, isLoading } = UseLogin();
+	
+	// curent time in minute
+	const currentTime = Math.floor(new Date().getTime() / 1000 / 60);
 
 	//query Login
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		login({ email: userName, password: password });
 	};
-	// const isLoading = true;
+
+
 	console.log(password, userName);
 
 	return (

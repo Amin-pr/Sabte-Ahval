@@ -1,6 +1,6 @@
 import RightBar from "../../ui/components/rightbar/RightBar";
 import styles from "./DashboardLayout.module.scss";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import { Slide } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 export function UseLogin() {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
+	const currentTime = Math.floor(new Date().getTime() / 1000 / 60);
 
 	const { mutate: login, isPending } = useMutation({
 		mutationFn: (username, password) => Login(username, password),
@@ -18,7 +19,7 @@ export function UseLogin() {
 				queryClient.setQueryData(["userInfo"], data);
 				localStorage.setItem("accessToken", data.data.access_token);
 				localStorage.setItem("name", data.data.name);
-				
+				localStorage.setItem("logedTime", currentTime);
 				navigate(`/`);
 				toast.success(` ${data.data.name} خوش آمدی`);
 			} else if (data.code !== 201) {

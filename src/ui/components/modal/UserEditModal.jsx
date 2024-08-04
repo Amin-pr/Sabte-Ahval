@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import {
 	Box,
 	Button,
+	CssBaseline,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -10,9 +12,14 @@ import {
 	Typography,
 } from "@mui/material";
 import styles from "./UserEditModal.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+import theme from "../../theme/theme";
+import UseEditUser from "../../../hooks/UseEditUser";
+import { useQueryClient } from "@tanstack/react-query";
+import Loading from "../loading/Loading";
 
-function UserEditModal(data) {
+function UserEditModal({ rowData }) {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -22,9 +29,45 @@ function UserEditModal(data) {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [refId, setRefId] = useState("");
 
+	console.log(name, username, phoneNumber, refId, rowData.id);
+	const { edit, isLoading, data: useEditRes } = UseEditUser();
+
+	const handleSubmit = (event) => {
+		const data = {
+			id: rowData?.id,
+			username: username,
+			phone_number: phoneNumber,
+			role_id: refId,
+			name: name,
+		};
+		event.preventDefault();
+		console.log(data);
+		edit(data);
+	};
+
+	const queryClient = useQueryClient();
+
+	
+	//close modal if response ok
+	useEffect(() => {
+		if (useEditRes?.success === true) {
+			setOpen(false);
+		}
+		queryClient.refetchQueries("users");
+	}, [queryClient, useEditRes?.success]);
+	console.log(isLoading);
+
+
+
 	return (
-		<Box>
-			<Button onClick={handleOpen}>Open modal</Button>
+		<ThemeProvider theme={theme}>
+			<CssBaseline />
+			<Button
+				onClick={handleOpen}
+				className={styles.button}
+			>
+				ویرایش
+			</Button>
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -32,6 +75,7 @@ function UserEditModal(data) {
 				aria-describedby="modal-modal-description"
 			>
 				<Box className={styles.modal}>
+					{isLoading && <Loading text={"...لطفا صبر کنید"} />}
 					<Box className={styles.headerContainer}>
 						<Typography
 							id="modal-modal-title"
@@ -52,8 +96,8 @@ function UserEditModal(data) {
 								autoComplete="Name"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
-								error={data?.errors?.name}
-								helperText={data?.errors?.name}
+								// error={data?.errors?.name}
+								// helperText={data?.errors?.name}
 							/>
 						</FormControl>
 
@@ -66,9 +110,8 @@ function UserEditModal(data) {
 								autoComplete="username"
 								value={username}
 								onChange={(e) => setUsername(e.target.value)}
-								helperText={data?.errors?.username}
-								error={data?.errors?.username}
-								
+								// helperText={data?.errors?.username}
+								// error={data?.errors?.username}
 							/>
 						</FormControl>
 						<FormControl className={styles.formControl}>
@@ -80,10 +123,9 @@ function UserEditModal(data) {
 								autoComplete="phone"
 								value={phoneNumber}
 								onChange={(e) => setPhoneNumber(e.target.value)}
-								helperText={data?.errors?.phone_number}
-								error={data?.errors?.phone_number}
+								// helperText={data?.errors?.phone_number}
+								// error={data?.errors?.phone_number}
 								sx={{ maxWidth: "250px" }}
-								
 							/>
 						</FormControl>
 
@@ -91,7 +133,7 @@ function UserEditModal(data) {
 							sx={{ minWidth: 120 }}
 							size="small"
 							about=""
-							error={data?.errors?.role_id}
+							// error={data?.errors?.role_id}
 							className={styles.formControl}
 						>
 							<InputLabel id="demo-select-small-label">دسترسی</InputLabel>
@@ -109,10 +151,20 @@ function UserEditModal(data) {
 								<MenuItem value={2004}>سطح سه</MenuItem>
 							</Select>
 						</FormControl>
+						<Box>
+							<Button
+								type="submit"
+								variant="contained"
+								color="success"
+								onClick={handleSubmit}
+							>
+								ساخت کاربر
+							</Button>
+						</Box>
 					</Box>
 				</Box>
 			</Modal>
-		</Box>
+		</ThemeProvider>
 	);
 }
 

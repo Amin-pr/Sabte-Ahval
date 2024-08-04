@@ -1,6 +1,6 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import "./app.scss";
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -125,6 +125,16 @@ function App() {
 
 	console.log(theme);
 	const queryClient = new QueryClient();
+
+	// const navigate = useNavigate();
+	// useEffect(() => {
+	// 	const currentTime = 0;
+
+	// 	const loggedTime = 11;
+	// 	if (loggedTime - currentTime >= 10) {
+	// 		navigate("/login");
+	// 	}
+	// }, []);
 
 	return (
 		<div className="app">

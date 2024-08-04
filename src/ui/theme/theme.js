@@ -10,9 +10,9 @@ const theme = createTheme({
 	},
 	palette: {
 		primary: {
-			main: "rgb(0, 103, 16)",
-			// light: "#42a5f5",
-			// dark: "#1565c0",
+			main: "#006710",
+			light: "#56a94f",
+			dark: "#003700",
 			contrastText: "#fff",
 		},
 	},
@@ -68,7 +68,7 @@ const theme = createTheme({
 		MuiTextField: {
 			root: {
 				// left: "90px !important",
-				fontSize: "240px",
+				// fontSize: "240px",
 				fontWeight: "800",
 				fontFamily: [
 					"Gill Sans",
@@ -81,7 +81,7 @@ const theme = createTheme({
 		MuiInputLabel: {
 			root: {
 				// position: "absolute !important",
-				fontSize: "240px",
+				// fontSize: "240px",
 				fontFamily: [
 					"Gill Sans",
 					"Gill Sans MT",

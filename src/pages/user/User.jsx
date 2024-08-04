@@ -1,19 +1,16 @@
 import styles from "./User.module.scss";
 
-import TableComp from "../../ui/components/table/TableComp";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DataTable from "../../ui/components/table/DataGrid";
 import CreateUserForm from "../../ui/components/createUserForm/CreatUserForm";
 import UseGetUser from "../../hooks/UseGetUser";
-import { Button } from "@mui/material";
 import Loading from "../../ui/components/loading/Loading";
-import { DeleteOutline } from "@mui/icons-material";
 import UseDeleteUser from "../../hooks/UseDeleteUser";
 import { useQueryClient } from "@tanstack/react-query";
-import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
 
 import { toast } from "react-toastify";
 import UserEditModal from "../../ui/components/modal/UserEditModal";
+import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
 function User() {
 	const QueryClient = useQueryClient();
 
@@ -57,34 +54,32 @@ function User() {
 			field: "name",
 			headerName: "نام",
 			width: 200,
-			// editable: false,
 		},
 		{
 			field: "username",
 			headerName: "نام کاربری",
 			width: 200,
-			// editable: true,
 		},
 		{
 			field: "phone_number",
 			headerName: "تلفن",
 			width: 200,
-			// editable: true,
 		},
 		{
 			field: "role",
 			headerName: "سطح دسترسی",
 			width: 200,
-			// editable: true,
 		},
 		{
 			field: "edits",
 			headerName: "تغییرات",
 			width: 300,
 
-			renderCell: (userData) => <UserEditModal data={userData}></UserEditModal>,
+			renderCell: (userData) => <RowButtonGroup params={userData} deleteUser={handleDeleteUser}/>,
 		},
 	];
+	const currentTime = Math.floor(new Date().getTime() / 1000 / 60);
+	console.log(currentTime);
 
 	return (
 		<div className={styles.holder}>

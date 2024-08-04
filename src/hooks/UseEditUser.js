@@ -22,5 +22,5 @@ export default function UseEditUser() {
 			return err;
 		},
 	});
-	return {  edit, isLoading: isPending, data };
+	return { edit, isLoading: isPending, data };
 }

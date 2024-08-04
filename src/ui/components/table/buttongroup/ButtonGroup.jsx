@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Box, Button, ButtonGroup, Divider } from "@mui/material";
 import styles from "./ButtonGroup.module.scss";
+import UserEditModal from "../../modal/UserEditModal";
 
 function RowButtonGroup({ params, deleteUser, editUser, newPassword }) {
 	return (
@@ -19,12 +20,8 @@ function RowButtonGroup({ params, deleteUser, editUser, newPassword }) {
 					حذف
 				</Button>
 				<Divider />
-				<Button
-					className={styles.button}
-					onClick={() => editUser(params)}
-				>
-					تغییر نام{" "}
-				</Button>
+				<UserEditModal rowData={params} />
+
 				<Button className={styles.button}>تغییر رمز</Button>
 			</ButtonGroup>
 		</Box>
