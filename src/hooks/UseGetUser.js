@@ -6,6 +6,7 @@ export default function UseGetUser() {
 	const { data, error, isPending } = useQuery({
 		queryKey: ["users"],
 		queryFn: GetUsers,
+
 		staleTime: 300000,
 		onSuccess: (data) => {
 			console.log(data.data.users.data);
@@ -20,6 +21,7 @@ export default function UseGetUser() {
 			toast.error(err.message);
 		},
 	});
+	console.log("called");
 
 	return { data, isPending, error };
 }

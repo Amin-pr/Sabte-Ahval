@@ -1,8 +1,8 @@
-export async function EditUser({ id, username, phone_number, role_id, name }) {
+export async function UpdatePassword({ id, password, password_confirmation }) {
 	const token = localStorage.getItem("accessToken");
-	console.log(id, name, username, phone_number, role_id);
+	console.log(id, password, password_confirmation);
 	const response = await fetch(
-		`http://ncrdashboard.icsdev.ir/api/v1/admin/update-user/${id}`,
+		` http://ncrdashboard.icsdev.ir/api/v1/admin/change-user-password/${id}`,
 		{
 			method: "PATCH",
 			headers: {
@@ -10,10 +10,8 @@ export async function EditUser({ id, username, phone_number, role_id, name }) {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				name: name,
-				username: username,
-				phone_number: phone_number,
-				role_id: role_id,
+				password: password,
+				password_confirmation: password_confirmation,
 			}),
 		}
 	);

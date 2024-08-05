@@ -9,7 +9,7 @@ import UseDeleteUser from "../../hooks/UseDeleteUser";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
-import UserEditModal from "../../ui/components/modal/UserEditModal";
+import UserEditModal from "../../ui/components/modal/edit user/UserEditModal";
 import RowButtonGroup from "../../ui/components/table/buttongroup/ButtonGroup";
 function User() {
 	const QueryClient = useQueryClient();
@@ -44,7 +44,7 @@ function User() {
 		DeleteUser(id);
 	}
 
-	function handleEditUser(id) {
+	function handleUpdatePassword(id) {
 		console.log(id);
 	}
 	// سربرگ ستون ها
@@ -75,7 +75,12 @@ function User() {
 			headerName: "تغییرات",
 			width: 300,
 
-			renderCell: (userData) => <RowButtonGroup params={userData} deleteUser={handleDeleteUser}/>,
+			renderCell: (userData) => (
+				<RowButtonGroup
+					params={userData}
+					deleteUser={handleDeleteUser}
+				/>
+			),
 		},
 	];
 	const currentTime = Math.floor(new Date().getTime() / 1000 / 60);

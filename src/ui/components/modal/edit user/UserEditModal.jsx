@@ -14,10 +14,10 @@ import {
 import styles from "./UserEditModal.module.scss";
 import { useEffect, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import theme from "../../theme/theme";
-import UseEditUser from "../../../hooks/UseEditUser";
+import theme from "../../../theme/theme";
+import UseEditUser from "../../../../hooks/UseEditUser";
 import { useQueryClient } from "@tanstack/react-query";
-import Loading from "../loading/Loading";
+import Loading from "../../loading/Loading";
 
 function UserEditModal({ rowData }) {
 	const [open, setOpen] = useState(false);
@@ -29,7 +29,6 @@ function UserEditModal({ rowData }) {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [refId, setRefId] = useState("");
 
-	console.log(name, username, phoneNumber, refId, rowData.id);
 	const { edit, isLoading, data: useEditRes } = UseEditUser();
 
 	const handleSubmit = (event) => {
@@ -47,7 +46,6 @@ function UserEditModal({ rowData }) {
 
 	const queryClient = useQueryClient();
 
-	
 	//close modal if response ok
 	useEffect(() => {
 		if (useEditRes?.success === true) {
@@ -56,8 +54,6 @@ function UserEditModal({ rowData }) {
 		queryClient.refetchQueries("users");
 	}, [queryClient, useEditRes?.success]);
 	console.log(isLoading);
-
-
 
 	return (
 		<ThemeProvider theme={theme}>
