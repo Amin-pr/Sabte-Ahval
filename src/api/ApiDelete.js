@@ -1,7 +1,7 @@
 export async function Delete(id) {
 	console.log(id);
 
-	const token = localStorage.getItem("accessToken");
+	const token = sessionStorage.getItem("accessToken");
 	const response = await fetch(
 		`http://ncrdashboard.icsdev.ir/api/v1/admin/delete-user/${id}`,
 		{

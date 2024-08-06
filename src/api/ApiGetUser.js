@@ -1,5 +1,5 @@
 export async function GetUsers() {
-	const token = localStorage.getItem("accessToken");
+	const token = sessionStorage.getItem("accessToken");
 	console.log(token);
 
 	const response = await fetch(

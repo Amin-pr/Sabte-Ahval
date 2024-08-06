@@ -7,7 +7,7 @@ export async function Register({
 }) {
 	console.log(name, username, password, phone_number, role_id);
 
-	const token = localStorage.getItem("accessToken");
+	const token = sessionStorage.getItem("accessToken");
 	const response = await fetch(
 		"http://ncrdashboard.icsdev.ir/api/v1/admin/create-user",
 		{
@@ -27,7 +27,7 @@ export async function Register({
 		}
 	);
 	const result = await response.json();
-	console.log(result,response)
+	console.log(result, response);
 
 	return result;
 }

@@ -12,7 +12,7 @@ export function useLogout() {
 			console.log(data);
 			if (data.code === 201) {
 				navigate(`/login`);
-				toast.success(`خروج با موفقیت انجام شد`);
+				toast.success(`    با موفقیت انجام شد`);
 			} else if (data.code !== 201) {
 				toast.error(data.message);
 			}

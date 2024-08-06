@@ -1,5 +1,5 @@
 export async function EditUser({ id, username, phone_number, role_id, name }) {
-	const token = localStorage.getItem("accessToken");
+	const token = sessionStorage.getItem("accessToken");
 	console.log(id, name, username, phone_number, role_id);
 	const response = await fetch(
 		`http://ncrdashboard.icsdev.ir/api/v1/admin/update-user/${id}`,

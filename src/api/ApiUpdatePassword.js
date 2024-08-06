@@ -1,5 +1,5 @@
 export async function UpdatePassword({ id, password, password_confirmation }) {
-	const token = localStorage.getItem("accessToken");
+	const token = sessionStorage.getItem("accessToken");
 	console.log(id, password, password_confirmation);
 	const response = await fetch(
 		` http://ncrdashboard.icsdev.ir/api/v1/admin/change-user-password/${id}`,

@@ -1,8 +1,18 @@
 import { lazy, Suspense, useEffect } from "react";
 import "./app.scss";
-import { HashRouter, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import {
+	HashRouter,
+	Navigate,
+	Route,
+	Routes,
+	useNavigate,
+} from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+	QueryClient,
+	QueryClientProvider,
+	useQueryClient,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ThemeProvider } from "styled-components";
 import theme from "./ui/theme/theme";
@@ -15,7 +25,11 @@ const Dashboarditems = lazy(() =>
 );
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "./ui/components/loading/Loading";
+import { ProtectedRoute } from "./ui/components/protect route/protectRoute";
 function App() {
+	// const queryClient = useQueryClient();
+	// const
+
 	const columns = [
 		{ field: "status", headerName: "وضعیت", width: 150 },
 		{
@@ -33,42 +47,37 @@ function App() {
 		{
 			field: "score",
 			headerName: "امتیاز",
-			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "officeCode",
 			headerName: "کد دفتر",
-			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "session",
 			headerName: "دوره",
-			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "city",
 			headerName: "شهر",
-			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "province",
 			headerName: "استان",
-			// type: "number",
 			width: 110,
 			editable: true,
 		},
 		{
 			field: "Num",
 			headerName: "ردیف",
-			// type: "number",
+
 			width: 110,
 			editable: true,
 		},
@@ -123,18 +132,7 @@ function App() {
 		},
 	];
 
-	console.log(theme);
 	const queryClient = new QueryClient();
-
-	// const navigate = useNavigate();
-	// useEffect(() => {
-	// 	const currentTime = 0;
-
-	// 	const loggedTime = 11;
-	// 	if (loggedTime - currentTime >= 10) {
-	// 		navigate("/login");
-	// 	}
-	// }, []);
 
 	return (
 		<div className="app">
@@ -155,43 +153,37 @@ function App() {
 							<Route
 								path="/"
 								element={
-									<Suspense fallback={<Loading text={"لطفا صبر نمایید..."} />}>
+									<ProtectedRoute>
 										<Dashboard />
-									</Suspense>
+									</ProtectedRoute>
 								}
 							>
 								<Route
 									path="/table"
 									element={
-										<Suspense
-											fallback={<Loading text={"لطفا صبر نمایید..."} />}
-										>
+										<ProtectedRoute>
 											<DataTable
 												columns={columns}
 												rows={rows}
 												exportAbility
 											/>
-										</Suspense>
+										</ProtectedRoute>
 									}
 								/>
 								<Route
 									path="/userManagment"
 									element={
-										<Suspense
-											fallback={<Loading text={"لطفا صبر نمایید..."} />}
-										>
+										<ProtectedRoute>
 											<User />
-										</Suspense>
+										</ProtectedRoute>
 									}
 								/>
 								<Route
 									path="/dashboard"
 									element={
-										<Suspense
-											fallback={<Loading text={"لطفا صبر نمایید..."} />}
-										>
+										<ProtectedRoute>
 											<Dashboarditems />
-										</Suspense>
+										</ProtectedRoute>
 									}
 								/>
 							</Route>

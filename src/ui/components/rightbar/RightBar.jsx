@@ -75,8 +75,8 @@ export default function PersistentDrawerRight() {
 
 	const [token, setToken] = useState();
 	const [name, setName] = useState();
-	const savedToken = localStorage.getItem("accessToken");
-	const savedname = localStorage.getItem("name");
+	const savedToken = sessionStorage.getItem("accessToken");
+	const savedname = sessionStorage.getItem("name");
 	// setToken(savedToken)
 	useEffect(() => {
 		setToken(savedToken);

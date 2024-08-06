@@ -4,6 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import { useLogout } from "../../../hooks/UseLogout";
+import Loading from "../loading/Loading";
 
 // eslint-disable-next-line react/prop-types
 export default function UserIcon({ userName, token }) {
@@ -22,6 +23,7 @@ export default function UserIcon({ userName, token }) {
 
 	return (
 		<div>
+			{isLoading && <Loading text={"در حال خروج"} />}
 			<Button
 				id="basic-button"
 				aria-controls={open ? "basic-menu" : undefined}
