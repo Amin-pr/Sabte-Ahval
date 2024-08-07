@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export function UseLogin() {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
-	const currentTime = Math.floor(new Date().getTime() / 1000 / 60) + 2;
+	const currentTime = Math.floor(new Date().getTime() / 1000 / 60) + 60;
 
 	const { mutate: login, isPending } = useMutation({
 		mutationFn: (username, password) => Login(username, password),

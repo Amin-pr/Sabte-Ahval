@@ -31,7 +31,7 @@ function Loading({ text }) {
 					variant="p"
 					fontWeight={"800"}
 					fontSize={"25px"}
-					sx={{ textWrap: "nowrap", m: 2 }}
+					sx={{ textWrap: "nowrap", m: 2, direction: "rtl" }}
 				>
 					{text}
 				</Typography>

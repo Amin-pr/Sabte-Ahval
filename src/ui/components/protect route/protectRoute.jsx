@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 export function ProtectedRoute({ children }) {
   const token = sessionStorage.getItem("accessToken");
   const tokenExpireTime = Number(sessionStorage.getItem("tokenExpireTime"));
-  const currentTime = Math.floor(new Date().getTime() / 1000 / 60) + 1;
+  const currentTime = Math.floor(new Date().getTime() / 1000 / 60)  ;
   let tokenTimeLeft = tokenExpireTime - currentTime;
 
   console.log(tokenExpireTime, currentTime, token, tokenTimeLeft);
