@@ -4,9 +4,13 @@ import { red } from "@mui/material/colors";
 const theme = createTheme({
 	direction: "rtl",
 	typography: {
-		fontFamily: ["Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS"].join(
-			", "
-		),
+		fontFamily: [
+			`"IRANSans-web"`,
+			"Gill Sans",
+			"Gill Sans MT",
+			"Calibri",
+			"Trebuchet MS",
+		].join(", "),
 	},
 	palette: {
 		primary: {

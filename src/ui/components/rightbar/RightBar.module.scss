@@ -41,12 +41,35 @@
 	display: flex;
 	justify-content: end !important;
 	// align-items: center;
-	P{font-size: 18px;
-		font-weight: 400;
+	P {
+		// font-size: 18px;
+		font-weight: 200;
 	}
 }
-.Divider{
+.Divider {
 	// text-align: right;
 	font-size: 20px;
 	font-weight: 700;
+}
+.IRANSans {
+	font-family: IRANSans-web;
+	color: #000;
+	margin-right: 50px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #fff;
+	font-weight: normal;
+}
+@font-face {
+	font-family: "IRANSans-web";
+	src: url("../../theme/font/iran/IRANSans-Medium-web.eot");
+
+	src: url("../../theme/font/iran/IRANSans-Medium-web.eot?#iefix") format("eot"),
+		/* IE6–8 */ url("../../theme/font/iran/IRANSans-Medium-web.woff2")
+			format("woff2"),
+		/* Chrome36+, Opera24+*/
+			url("../../theme/font/iran/IRANSans-Medium-web.woff") format("woff"),
+		/* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+			url("../../theme/font/iran/IRANSans-Medium-web.ttf") format("ttf");
+	font-weight: 500;
 }

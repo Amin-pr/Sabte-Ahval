@@ -1,5 +1,5 @@
 import { History, List, QuestionAnswer } from "@mui/icons-material";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 // import styles from "../Dashboard items/"
 import styles from "../Dashboard items/DashboardItems.module.scss";
 import { useLocation, useParams } from "react-router-dom";
@@ -32,10 +32,10 @@ function Dashboarditems() {
 						xs={4}
 						sm={5}
 					>
-						<Box className={styles.item}>
+						<Button className={styles.item}>
 							<Typography variant="p">{item.name}</Typography>
 							{item.icon}
-						</Box>
+						</Button>
 					</Grid>
 				))}
 			</Grid>

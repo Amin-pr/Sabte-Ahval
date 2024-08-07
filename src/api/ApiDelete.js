@@ -7,13 +7,13 @@ export async function Delete(id) {
 		{
 			method: "DELETE",
 			headers: {
+				Accept: "application/json",
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
 		}
 	);
 	const result = await response.json();
-	console.log(result, response);
 
 	return result;
 }
